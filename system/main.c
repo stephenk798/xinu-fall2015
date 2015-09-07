@@ -6,9 +6,11 @@
 process	main(void)
 {
 	/*Moved hello world message to intialize.c on 9/1/15*/
-	/*added create lab0app1.c and lab0app2.c*/
-	//resume(create((void *)lab0app1, 65536, 20, "lab0 app1", 0, NULL));
-	//commentsssss
+	
+	/*added create lab0app1.c and lab0app2.c 9/7/15*/
+	resume(create((void *)lab0app1, 65536, 20, "lab0 app1", 0, NULL));
+
+
 	/*-------*/
 	kprintf("\n...creating a shell\n");
 	recvclr();
