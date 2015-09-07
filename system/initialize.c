@@ -78,7 +78,7 @@ void	nulluser()
 
 	/*Moved welcome message from main.c to here on 9/1/15*/
 	kprintf("\nWelcome!\n");
-	kprintf("\n\n%s%s\n%s\n%s\n%s\n%s\n%s\n",WELCOME_BAN0, WELCOME_BAN1, WELCOME_BAN2, WELCOME_BAN3, WELCOME_BAN4, WELCOME_BAN5, WELCOME_BAN6, WELCOME_BAN7)
+	kprintf("\n\n%s%s\n%s\n%s\n%s\n%s\n%s\n",WELCOME_BAN0, WELCOME_BAN1, WELCOME_BAN2, WELCOME_BAN3, WELCOME_BAN4, WELCOME_BAN5, WELCOME_BAN6, WELCOME_BAN7);
 	kprintf("\nI was modified by Stephen Kramer, kramer40!\n");
 	kprintf("\nI am being printed from nulluser()in system/intialize.c.\n");
 	kprintf("\nEventually I will turn into the do-nothing null process, and thats okay.\n");
