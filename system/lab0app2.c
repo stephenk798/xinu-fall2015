@@ -4,6 +4,6 @@
 
 process lab0app2(){
 	int result = 3782*751;
-	kprintf("3782 times 751 equals %d. My pid is %d", result, getpid());
+	kprintf("3782 times 751 equals %d. My pid is %d\n", result, getpid());
 	return OK;
 }
