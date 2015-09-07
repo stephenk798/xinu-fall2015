@@ -3,6 +3,6 @@
 #include <xinu.h>
 
 process lab0app1(){
-	kprintf("I am a process. My pid is %d", getpid());
+	kprintf("I am lab0app1 process. My pid is %d", getpid());
 	return OK;
 }
