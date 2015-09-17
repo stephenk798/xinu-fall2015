@@ -9,8 +9,7 @@ process	main(void)
 
 
 	/*added create lab0app1.c and lab0app2.c 9/7/15*/
-	resume(create(lab0app1, 65536, 20, "lab0 app1", 0, NULL));
-	resume(create(lab0app2, 65536, 20, "lab0 app2", 0, NULL));
+	resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
 	sleepms(200);
 	/*-------*/
 	kprintf("\n...creating a shell\n");

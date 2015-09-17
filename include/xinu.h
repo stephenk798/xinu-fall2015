@@ -41,3 +41,4 @@
 #include <stdio.h>
 #include <string.h>
 #include <messages.h>
+#include <lab1.h>
