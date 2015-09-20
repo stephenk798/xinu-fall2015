@@ -9,7 +9,7 @@ process	main(void)
 
 
 	/*added create lab0app1.c and lab0app2.c 9/7/15*/
-	resume(create(host2netl(12), 65536, 20, "host2netl", 0, NULL));
+	kprintf("0x12345678 turns into 0x%08X\n",host2netl(0x12345678));
 	resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
 	sleepms(200);
 	/*-------*/
@@ -28,3 +28,7 @@ process	main(void)
 	}
 	return OK;
 }
+0x12345678
+0000 0000 0001 0010 0011 0100 0101 0110 0111 1000
+0x78563412
+0000 0000 0111 1000 0101 0110 0011 0100 0001 0010
