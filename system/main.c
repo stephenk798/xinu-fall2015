@@ -3,13 +3,16 @@
 #include <xinu.h>
 #include <stdio.h>
 
+void test_host2net(long input){
+	kprintf("0x%08X turns into 0x%08X\n", input, host2netl(input));
+
+}
 process	main(void)
 {
 	/*Moved hello world message to intialize.c on 9/1/15*/
 
 
 	/*added create lab0app1.c and lab0app2.c 9/7/15*/
-	kprintf("0x12345678 turns into 0x%08X\n", host2netl((uint32)(0x12345678));
 	resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
 	sleepms(200);
 	/*-------*/
