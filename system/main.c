@@ -9,6 +9,7 @@ process	main(void)
 
 
 	/*added create lab0app1.c and lab0app2.c 9/7/15*/
+	resume(create(host2netl(12), 65536, 20, "host2netl", 0, NULL));
 	resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
 	sleepms(200);
 	/*-------*/
