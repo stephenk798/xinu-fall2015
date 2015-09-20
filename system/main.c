@@ -9,7 +9,7 @@ process	main(void)
 
 
 	/*added create lab0app1.c and lab0app2.c 9/7/15*/
-	kprintf("0x12345678 turns into 0x%08X\n",host2netl(0x12345678));
+	kprintf("0x12345678 turns into 0x%08X\n", host2netl((long)0x12345678));
 	resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
 	sleepms(200);
 	/*-------*/
