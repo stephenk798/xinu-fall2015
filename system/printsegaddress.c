@@ -1,8 +1,8 @@
 #include <xinu.h>
+//Prints out Start and end bytes for the Text, data, and bss segements, along with their size and first value.
+//Added 9/20/15 for Lab1
 void printsegaddress(){
-	kprintf("Text:\n Start: 0x%08x\n End: 0x%08X\n Value: 0x%08x\n Size: %10d\n", (uint32)&text, (uint32)&etext, (uint32)etext, (uint32)(&etext - &text));
-	kprintf("\nText: 0x%08X\n Etext: 0x%08X\n &text: 0x%08X\n &etext: 0x%08X\n &etext-1: 0x%08X\n *(etext-1): 0x%08X\n *(&etext): 0x%08X\n", (uint32)text, (uint32)etext, (uint32)&text, (uint32)&etext, (uint32)(&etext-1),(uint32)*(&etext-1), (uint32)*(&etext));
-	kprintf("data: 0x%08X\n Edata: 0x%08X\n &data: 0x%08X\n &edata: 0x%08X\n &edata-1: 0x%08X\n *(edata-1): 0x%08X\n *(&edata): 0x%08X\n", (uint32)data, (uint32)edata, (uint32)&data, (uint32)&edata, (uint32)(&edata-1),(uint32)*(&edata-1), (uint32)*(&edata));
-
-	// kprintf("Text\n Value: 0x%08X \n End: 0x%08X\n Size: %10d\n", (uint32)*(&etext), (uint32)(&etext - 1), (uint32)(&etext - &text));
+	kprintf("Text:\n Start: 0x%08x\n End: 0x%08X\n Value: 0x%08x\n Size: %10d bytes\n", (uint32)&text, (uint32)&etext, (uint32)text, (uint32)((&etext - &text)*4));
+	kprintf("Data:\n Start: 0x%08x\n End: 0x%08X\n Value: 0x%08x\n Size: %10d bytes\n", (uint32)&data, (uint32)&edata, (uint32)data, (uint32)((&edata - &data)*4));
+	kprintf("Bss:\n Start: 0x%08x\n End: 0x%08X\n Value: 0x%08x\n Size: %10d bytes\n", (uint32)&bss, (uint32)&ebss, (uint32)bss, (uint32)((&ebss - &bss)*4));
 }
