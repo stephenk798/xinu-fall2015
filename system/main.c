@@ -24,17 +24,17 @@ process	main(void)
 	pid32 procC = create(printloop, 1024, 20, "printloop", 1, "C");
 	pid32 procD = create(printloop, 1024, 20, "printloop", 1, "D");
 
-	kprintf("P");
+	kprintf("P\n");
 	resume(procA);
-	kprintf("P");
+	kprintf("P\n");
 	resume(procB);
-	kprintf("P");
+	kprintf("P\n");
 	resume(procC);
-	kprintf("P");
+	kprintf("P\n");
 	resume(procD);
 	
 	sleepms(4000);
-	
+
 	sleepms(200);
 	/*-------*/
 	kprintf("\n...creating a shell\n");
