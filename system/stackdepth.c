@@ -8,8 +8,7 @@ int stackdepth(){
 		:"=r"(top_esp), "=r" (top_ebp));
 	kprintf("top_esp: 0x%08X\n", top_esp);
 	kprintf("top_ebp: 0x%08X\n", top_ebp);
-	int pid = getpid();
-	struct procent	*proc = &proctab[pid];
+	struct procent	*proc = &proctab[currpid];
 	if(top_esp == proc->prstkbase){
 		kprintf("Stack Base: 0x%08X\n", proc->prstkbase);
 
