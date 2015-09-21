@@ -7,7 +7,7 @@
 void printloop(char c){
 	int i;
 	int j;
-	for(i = 0; i < OUTERB; i++;){
+	for(i = 0; i < OUTERB; i++){
 		kprintf("%c", c);
 		for(j = 0; j < INNERB; j++){
 		}
