@@ -1,7 +1,7 @@
 #include <xinu.h>
 #include <stdio.h>
 
-#define INNERB 100000
+#define INNERB 500000
 #define OUTERB 5
 
 void printloop(char c){
