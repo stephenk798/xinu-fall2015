@@ -9,30 +9,22 @@ process	main(void)
 
 	/*test code for lab 1, host2netl and printsegaddress*/
 
-	stacktrace(currpid);
+	// stacktrace(currpid);
 
-	kprintf("-----Stack depth test-----\n");
-	unsigned long *esp_main;
+	// kprintf("-----Stack depth test-----\n");
+	// stackdepth();
 
-	asm("mov %%ebp, %0;"
-		:"=r"(esp_main));
-	kprintf("man_ebp: 0x%08X\n", esp_main);
-	
-	stackdepth();
-	int pid = getpid();
-	struct procent	*proc = &proctab[pid];
-	kprintf("prstkbase for main: 0x%08X\n", proc->prstkbase);
+	// kprintf("-----DOne-----\n");
 
-	kprintf("-----DOne-----\n");
+	// kprintf("0x12345678 turns into 0x%08X\n", host2netl(0x12345678));
+	// resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
+	// kprintf("\n");
+	// sleepms(300);
 
-	kprintf("0x12345678 turns into 0x%08X\n", host2netl(0x12345678));
-	resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
-	kprintf("\n");
-	sleepms(300);
-	pid32 procA = create(printloop, 1024, 20, "printloop", 1, 'A');
-	pid32 procB = create(printloop, 1024, 20, "printloop", 1, 'B');
-	pid32 procC = create(printloop, 1024, 50, "printloop", 1, 'C');
-	pid32 procD = create(printloop, 1024, 50, "printloop", 1, 'D');
+	pid32 procA = create(printnoloop, 1024, 20, "printnoloop", 1, 'A');
+	pid32 procB = create(printnoloop, 1024, 20, "printnoloop", 1, 'B');
+	pid32 procC = create(printnoloop, 1024, 20, "printnoloop", 1, 'C');
+	pid32 procD = create(printnoloop, 1024, 20, "printnoloop", 1, 'D');
 
 	kprintf("P");
 	resume(procA);
