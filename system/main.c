@@ -34,8 +34,8 @@ process	main(void)
 	resume(procC);
 	kprintf("P");
 	resume(procD);
-	
-	sleepms(4000);
+	kprintf("Main dpeth: %d\n",stackdepth());
+	sleepms(10000);
 	kprintf("\n");
 	sleepms(200);
 	/*-------*/
