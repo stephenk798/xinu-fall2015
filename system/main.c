@@ -9,6 +9,8 @@ process	main(void)
 
 	/*test code for lab 1, host2netl and printsegaddress*/
 
+	stacktrace();
+
 	kprintf("-----Stack depth test-----\n");
 	unsigned long *esp_main;
 
