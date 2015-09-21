@@ -33,6 +33,7 @@ process	main(void)
 	kprintf("P");
 	resume(procD);
 	
+	sleepms(4000);
 	
 	sleepms(200);
 	/*-------*/
