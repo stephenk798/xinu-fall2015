@@ -7,10 +7,10 @@ int stackdepth(){
 	unsigned long *top_esp, *top_ebp;
 	top_esp = top_ebp-1;
 	
-	asm("movl %esp, esp;");
-	asm("movl %ebp, ebp;");
-	kprintf("top_esp: 0x%08X\n", top_esp);
-	kprintf("top_ebp: 0x%08X\n", top_ebp);
+	// asm("movl %esp, esp;");
+	// asm("movl %ebp, ebp;");
+	// kprintf("top_esp: 0x%08X\n", top_esp);
+	// kprintf("top_ebp: 0x%08X\n", top_ebp);
 	kprintf("------STACKTRACE------\n");
 	stacktrace(currpid);
 	struct procent	*proc = &proctab[currpid];
