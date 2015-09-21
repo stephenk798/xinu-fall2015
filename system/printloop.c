@@ -9,7 +9,7 @@ void printloop(char c){
 	int j = 0;
 	while( i < OUTERB){
 		kprintf("%c", c);
-		for(j < INNERB){
+		while(j < INNERB){
 			j++;
 		}
 		i++;
