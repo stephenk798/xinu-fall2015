@@ -7,12 +7,10 @@
 void printloop(char c){
 	int i = 0; 
 	int j = 0;
-	while( i < OUTERB){
+	for( i < OUTERB; i++;){
 		kprintf("%c", c);
-		while(j < INNERB){
-			j++;
+		for(j < INNERBl j++){
 		}
-		i++;
 	}
 	return;
 }

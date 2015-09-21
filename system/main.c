@@ -25,13 +25,13 @@ process	main(void)
 	pid32 procC = create(printloop, 1024, 20, "printloop", 1, 'C');
 	pid32 procD = create(printloop, 1024, 20, "printloop", 1, 'D');
 
-	kprintf('P');
+	kprintf("P");
 	resume(procA);
-	kprintf('P');
+	kprintf("P");
 	resume(procB);
-	kprintf('P');
+	kprintf("P");
 	resume(procC);
-	kprintf('P');
+	kprintf("P");
 	resume(procD);
 	
 	sleepms(4000);
