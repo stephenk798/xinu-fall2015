@@ -7,10 +7,13 @@ process	main(void)
 {
 	/*Moved hello world message to intialize.c on 9/1/15*/
 
+	/*test code for lab 1, host2netl and printsegaddress*/
 
-	/*added create lab0app1.c and lab0app2.c 9/7/15*/
+	kprintf("-----Stack depth test-----\n");
+	stackdepth();
 	kprintf("0x12345678 turns into 0x%08X\n", host2netl(0x12345678));
 	resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
+	
 	sleepms(200);
 	/*-------*/
 	kprintf("\n...creating a shell\n");
@@ -28,7 +31,3 @@ process	main(void)
 	}
 	return OK;
 }
-// 0x12345678
-// 0000 0000 0001 0010 0011 0100 0101 0110 0111 1000
-// 0x78563412
-// 0000 0000 0111 1000 0101 0110 0011 0100 0001 0010
