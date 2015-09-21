@@ -5,11 +5,9 @@
 #define OUTERB 5
 
 void printloop(char c){
-	int i = 0; 
-	int j = 0;
-	for( i < OUTERB; i++;){
+	for(int i = 0; i < OUTERB; i++;){
 		kprintf("%c", c);
-		for(j < INNERBl j++){
+		for(int j = 0; j < INNERB; j++){
 		}
 	}
 	return;
