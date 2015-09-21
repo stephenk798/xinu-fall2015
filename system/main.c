@@ -9,13 +9,14 @@ process	main(void)
 
 	/*test code for lab 1, host2netl and printsegaddress*/
 
-	// kprintf("-----Stack depth test-----\n");
-	// stackdepth();
-	// int pid = getpid();
-	// struct procent	*proc = &proctab[pid];
-	// kprintf("prstkbase for main: 0x%08X\n", proc->prstkbase);
+	kprintf("-----Stack depth test-----\n");
+	stackdepth();
+	int pid = getpid();
+	struct procent	*proc = &proctab[pid];
+	kprintf("prstkbase for main: 0x%08X\n", proc->prstkbase);
 
-	// kprintf("-----DOne-----\n");
+	kprintf("-----DOne-----\n");
+	
 	kprintf("0x12345678 turns into 0x%08X\n", host2netl(0x12345678));
 	resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
 	kprintf("\n");
