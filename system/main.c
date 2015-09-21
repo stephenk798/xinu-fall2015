@@ -23,7 +23,7 @@ process	main(void)
 	pid32 procA = create(printloop, 1024, 20, "printloop", 1, 'A');
 	pid32 procB = create(printloop, 1024, 20, "printloop", 1, 'B');
 	pid32 procC = create(printloop, 1024, 20, "printloop", 1, 'C');
-	pid32 procD = create(printloop, 1024, 20, "printloop", 1, 'D');
+	pid32 procD = create(printloop, 1024, 50, "printloop", 1, 'D');
 
 	kprintf("P");
 	resume(procA);
