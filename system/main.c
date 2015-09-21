@@ -28,12 +28,16 @@ process	main(void)
 
 	kprintf("P");
 	resume(procA);
+	sleepms(100);
 	kprintf("P");
 	resume(procB);
+	sleepms(100);
 	kprintf("P");
 	resume(procC);
+	sleepms(100);
 	kprintf("P");
 	resume(procD);
+	sleepms(100);
 	kprintf("Main dpeth: %d\n",stackdepth());
 	sleepms(10000);
 	kprintf("\n");
