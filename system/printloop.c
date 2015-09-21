@@ -17,7 +17,7 @@ void printloop(char c){
 	return;
 }
 
-printnoloop(char c){
+void printnoloop(char c){
 	kprintf("%c", c);
 	kprintf("depth: %d", stackdepth());
 	sleepms(10000);
