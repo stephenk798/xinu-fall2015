@@ -4,10 +4,10 @@ int stackdepth(){
 	unsigned long *top_esp, *top_ebp;
 	unsigned long *cur_esp, *cur_ebp;
 
-	asm("mov %esp, top_esp");
+	asm("mov %esp, _top_esp");
 	// asm("mov top_ebp, ebp");
 	// asm("mov cur_esp, esp");
-	kprintf("top_esp: 0x%08X\n", _top_esp);
+	kprintf("top_esp: 0x%08X\n", top_esp);
 	int pid = getpid();
 	struct procent	*proc = &proctab[pid];
 	if(top_esp == proc->prstkbase){
