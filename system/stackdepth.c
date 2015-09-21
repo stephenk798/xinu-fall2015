@@ -4,7 +4,7 @@ int stackdepth(){
 	unsigned long *top_esp, *top_ebp;
 	unsigned long *cur_esp, *cur_ebp;
 
-	asm("mov %esp, %0;"
+	asm("mov %%esp, %0;"
 		:"=r"(top_esp));
 	// asm("mov top_ebp, ebp");
 	// asm("mov cur_esp, esp");
