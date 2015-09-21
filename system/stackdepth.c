@@ -3,8 +3,8 @@
 int stackdepth(){
 	unsigned long *top_esp, *top_ebp;
 
-	asm("mov %%esp, %0;
-		 mov %%ebp, %1;"
+	asm("mov %%esp, %0;"
+		 "mov %%ebp, %1;"
 		:"=r"(top_esp), "=r" (top_ebp));
 	kprintf("top_esp: 0x%08X\n", top_esp);
 	int pid = getpid();
