@@ -18,23 +18,24 @@ process	main(void)
 	// kprintf("-----DOne-----\n");
 	kprintf("0x12345678 turns into 0x%08X\n", host2netl(0x12345678));
 	resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
+	kprintf("\n");
 	sleepms(300);
 	pid32 procA = create(printloop, 1024, 20, "printloop", 1, 'A');
 	pid32 procB = create(printloop, 1024, 20, "printloop", 1, 'B');
 	pid32 procC = create(printloop, 1024, 20, "printloop", 1, 'C');
 	pid32 procD = create(printloop, 1024, 20, "printloop", 1, 'D');
 
-	kprintf("P\n");
+	kprintf("P");
 	resume(procA);
-	kprintf("P\n");
+	kprintf("P");
 	resume(procB);
-	kprintf("P\n");
+	kprintf("P");
 	resume(procC);
-	kprintf("P\n");
+	kprintf("P");
 	resume(procD);
 	
 	sleepms(4000);
-
+	kprintf("\n");
 	sleepms(200);
 	/*-------*/
 	kprintf("\n...creating a shell\n");

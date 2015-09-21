@@ -8,7 +8,7 @@ void printloop(char c){
 	int i = 0; 
 	int j = 0;
 	while( i < OUTERB){
-		kprintf("%c\n", c);
+		kprintf("%c", c);
 		while(j < INNERB){
 			j++;
 		}
