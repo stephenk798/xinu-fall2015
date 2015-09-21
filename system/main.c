@@ -12,9 +12,9 @@ process	main(void)
 	kprintf("-----Stack depth test-----\n");
 	unsigned long *esp_main;
 
-	asm("mov %%esp, %0;"
+	asm("mov %%ebp, %0;"
 		:"=r"(esp_main));
-	kprintf("man_esp: 0x%08X\n", esp_main);
+	kprintf("man_ebp: 0x%08X\n", esp_main);
 	
 	stackdepth();
 	int pid = getpid();
