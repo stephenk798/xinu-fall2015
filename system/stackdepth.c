@@ -23,7 +23,7 @@ int stackdepth(){
 		kprintf(" Count: %d\n", depth);
 		kprintf(" ebp: 0x%08X\n", top_ebp);
 		kprintf(" esp: 0x%08X\n", top_esp);
-		kprintf(" size: %10d\n", (uint32)(top_ebp-top_esp);
+		kprintf(" size: %10d\n", (uint32)(top_ebp-top_esp));
 
 		top_esp = top_ebp+4; //set esp to the bottom of the next stack frame
 		top_ebp = (unsigned long *)(*top_ebp); //set ebp to the address that is stored in itself
