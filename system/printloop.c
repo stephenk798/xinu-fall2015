@@ -18,7 +18,6 @@ void printloop(char c){
 }
 
 void printnoloop(char c){
-	int i=0;
 	kprintf("%c", c);
 	kprintf("noloop depth: %d\n", stackdepth());
 	sleepms(10000);

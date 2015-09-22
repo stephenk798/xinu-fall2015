@@ -26,24 +26,20 @@ process	main(void)
 	// kprintf("\n");
 	// sleepms(300);
 
-	pid32 procA = create(printnoloop, 1024, 20, "printnoloop", 1, 'A');
-	pid32 procB = create(printnoloop, 1024, 20, "printnoloop", 1, 'B');
-	pid32 procC = create(printnoloop, 1024, 20, "printnoloop", 1, 'C');
-	pid32 procD = create(printnoloop, 1024, 20, "printnoloop", 1, 'D');
+	pid32 procA = create(printnoloop, 1024, 24, "printnoloop", 1, 'A');
+	pid32 procB = create(printnoloop, 1024, 23, "printnoloop", 1, 'B');
+	pid32 procC = create(printnoloop, 1024, 22, "printnoloop", 1, 'C');
+	pid32 procD = create(printnoloop, 1024, 21, "printnoloop", 1, 'D');
 
 	kprintf("P");
 	resume(procA);
-	sleepms(100);
 	kprintf("P");
 	resume(procB);
-	sleepms(100);
 	kprintf("P");
 	resume(procC);
-	sleepms(100);
 	kprintf("P");
 	resume(procD);
-	sleepms(100);
-	bob();
+	stackdepth();
 	sleepms(10000);
 	kprintf("\n");
 	sleepms(200);
