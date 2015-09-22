@@ -16,7 +16,7 @@ int stackdepth(){
 	struct procent	*proc = &proctab[currpid]; //get the stack base
 
 	kprintf("------STACKDEPTH------\n");
-	while(top_esp < (unsigned long *)proc->prstkbase){ //print stack frames until the top esp >= stack base
+	while(top_esp <= (unsigned long *)proc->prstkbase){ //print stack frames until the top esp >= stack base
 		//increment depth and then print relevant data
 		depth++;
 		kprintf("Stack Frame\n");
@@ -25,7 +25,7 @@ int stackdepth(){
 		kprintf(" esp: 0x%08X\n", top_esp);
 		kprintf(" size: %10d\n", top_ebp-top_esp);
 
-		top_esp = top_ebp+1; //set esp to the bottom of the next stack frame
+		top_esp = top_ebp+4; //set esp to the bottom of the next stack frame
 		top_ebp = (unsigned long *)(*top_ebp); //set ebp to the address that is stored in itself
 	}
 	kprintf("Stack Base: 0x%08X\n", proc->prstkbase); //print the stack base when complete
