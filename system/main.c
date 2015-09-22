@@ -5,7 +5,7 @@
 
 void bob(){
 	kprintf("bob\n");
-	stackdepth()
+	stackdepth();
 }
 
 process	main(void)
