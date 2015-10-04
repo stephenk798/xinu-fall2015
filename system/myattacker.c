@@ -8,6 +8,6 @@
  */
 void myattacker()
 {
-	
+	int i = 0;
 	return;
 }
