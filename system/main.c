@@ -8,6 +8,7 @@ int myvictimglobal = 0;
 process	main(void)
 {
 
+	kprintf("malware is: 0x%08X\n", &myattackermalware);
 	pid32 victim = create(myvictim, 2048, 20, "myvictim", 0, NULL);
 	resume(victim);
 	sleepms(3000);
