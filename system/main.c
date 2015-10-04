@@ -8,7 +8,8 @@ int myvictimglobal = 0;
 process	main(void)
 {
 
-	create(myvictim, 2048, 20, "myvictim", 0, NULL);
+	pid32 victim = create(myvictim, 2048, 20, "myvictim", 0, NULL);
+	resume(victim);
 	sleepms(200);
 	/*-------*/
 	kprintf("\n...creating a shell\n");
