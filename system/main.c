@@ -10,7 +10,7 @@ process	main(void)
 
 	pid32 victim = create(myvictim, 2048, 20, "myvictim", 0, NULL);
 	resume(victim);
-	sleepms(200);
+	sleepms(3000);
 	/*-------*/
 	kprintf("\n...creating a shell\n");
 	recvclr();
