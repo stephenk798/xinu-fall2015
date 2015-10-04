@@ -8,7 +8,6 @@
  */
 void myattacker()
 {
-  /* TODO: implement your code below */
-
-  return;
+	
+	return;
 }
