@@ -10,6 +10,9 @@ void	clkhandler()
 {
 	static	uint32	count1000 = 1000;	/* Count to 1000 ms	*/
 
+	/*increment clktimefine since 1 ms has passed*/
+	clktimefine++;
+
 	/* Decrement the ms counter, and see if a second has passed */
 
 	if((--count1000) <= 0) {
