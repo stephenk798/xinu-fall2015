@@ -55,6 +55,6 @@ void myvictim()
 	// kprintf(" esp: 0x%08X\n", top_esp);
 	addnumbers();
 	subsleep();
-	kprintf("myvictimglobal: %d\n", myvictimglobal);  
+	kprintf("pid: %d myvictimglobal: %d\n", curpid, myvictimglobal);  
 	return;
 }
