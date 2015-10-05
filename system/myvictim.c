@@ -31,11 +31,12 @@ int subsleep(){
 	asm("movl %esp,esp;"); //get the esp and ebp into the global vars
 	asm("movl %ebp,ebp;");
 	//TODO: FIND WHERE THE RETURN ADDRESS IS HERE, MAYBE NOT ADD 4, MAYBE ADD LESS
-	for(int i = 1; i < 5; i++)
+	int i = 0;
+	whie (i < 5)
 	{
 		top_esp = ebp+i;
 		kprintf(" ebp+%d: 0x%08X ebpVal: 0x%08X\n", i, top_esp, *top_esp);
-
+		i++;
 	}
 	top_ebp = ebp;
 	// top_esp = esp; //and set local vars to the global ones
