@@ -15,9 +15,6 @@ process	main(void)
 	resume(attacker);
 	kprintf("-----My Victim-----\n");
 	stacktrace(victim);
-	kprintf("-----My Attacker-----\n");
-	stacktrace(attacker);
-	kprintf("-----End-----\n");
 	sleepms(3000);
 	/*-------*/
 	kprintf("\n...creating a shell\n");
