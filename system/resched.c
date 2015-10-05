@@ -32,8 +32,11 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
+<<<<<<< HEAD
 		// ptold->prcpuused = clktimefine - ptold->prcpuused;
 		// kprintf("process: %s used: %d milli secs", ptold->prname, ptold->prcpuused);
+=======
+>>>>>>> parent of e32958f... added clktimefine and cpu monitoring
 		insert(currpid, readylist, ptold->prprio);
 	}
 
@@ -42,7 +45,10 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	currpid = dequeue(readylist);
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
+<<<<<<< HEAD
 	//ptnew->prcpuused = clktimefine;
+=======
+>>>>>>> parent of e32958f... added clktimefine and cpu monitoring
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
