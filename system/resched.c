@@ -32,8 +32,8 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
-		ptold->prcpuused = clktimefine - ptold->prcpuused;
-		kprintf("process: %s used: %d milli secs", ptold->prname, ptold->prcpuused);
+		// ptold->prcpuused = clktimefine - ptold->prcpuused;
+		// kprintf("process: %s used: %d milli secs", ptold->prname, ptold->prcpuused);
 		insert(currpid, readylist, ptold->prprio);
 	}
 
@@ -42,7 +42,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	currpid = dequeue(readylist);
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
-	ptnew->prcpuused = clktimefine;
+	//ptnew->prcpuused = clktimefine;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
