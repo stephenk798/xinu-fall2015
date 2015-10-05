@@ -24,24 +24,20 @@ int subsleep(){
 	c = a - b;
 	a = a - c;
 	unsigned long *top_esp, *top_ebp;
-
+	//ITS EBP+1 THATS WHERE RETURN ADDRESS IS STORED
 	int depth = 0;	
 	kprintf("subsleep return: 0x%08X\n",__builtin_return_address(0));
 	kprintf("----victim func----\n");
 	asm("movl %esp,esp;"); //get the esp and ebp into the global vars
 	asm("movl %ebp,ebp;");
-	//TODO: FIND WHERE THE RETURN ADDRESS IS HERE, MAYBE NOT ADD 4, MAYBE ADD LESS
-	int i = 0;
-	while (i < 5)
-	{
-		top_esp = ebp+i;
-		kprintf(" ebp+%d: 0x%08X ebpVal: 0x%08X\n", i, top_esp, *top_esp);
-		i++;
-	}
+	top_esp = esp;
 	top_ebp = ebp;
 	// top_esp = esp; //and set local vars to the global ones
 	// top_ebp = ebp;
 	kprintf(" ebp: 0x%08X ebpVal: 0x%08X\n", top_ebp, *top_ebp);
+	kprintf(" ebp+1: 0x%08X ebpVal: 0x%08X\n", (top_ebp+1), *(top_ebp+1));
+	kprintf(" esp: 0x%08X espVal: 0x%08X\n", top_esp, *top_esp);
+	
 	sleepms(2000);
 	return a;
 }
