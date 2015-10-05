@@ -31,6 +31,10 @@ int subsleep(){
 	sleepms(2000);
 	return a;
 }
+int afunc(){
+	int a = 9;
+	return a+subsleep;
+}
 void myvictim()
 {
 	// unsigned long *top_esp, *top_ebp;
@@ -44,7 +48,7 @@ void myvictim()
 	// // top_ebp = ebp;
 	// kprintf(" ebp: 0x%08X\n", top_ebp);
 	// kprintf(" esp: 0x%08X\n", top_esp);
-	subsleep();
+	afunc();
 	kprintf("vicpid: %d myvictimglobal: %d\n", currpid, myvictimglobal);  
 	return;
 }
