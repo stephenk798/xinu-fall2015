@@ -8,6 +8,7 @@
  */
 void myattacker()
 {
+	kprintf("----Attacker----\n");
 	stackdepth();
 	return;
 }

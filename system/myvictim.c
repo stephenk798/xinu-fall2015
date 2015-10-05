@@ -28,6 +28,8 @@ int subsleep(){
 }
 void myvictim()
 {
+	kprintf("----Victim----\n");
+	stackdepth();
 	addnumbers();
 	subsleep();
 	kprintf("myvictimglobal: %d\n", myvictimglobal);  
