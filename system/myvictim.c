@@ -21,7 +21,7 @@ int subsleep(){
 	// asm("movl %esp,esp;"); //get the esp and ebp into the global vars
 	// asm("movl %ebp,ebp;");
 	// top_esp = esp;
-	
+
 	// top_ebp = ebp;
 	// // top_esp = esp; //and set local vars to the global ones
 	// // top_ebp = ebp;
@@ -59,6 +59,6 @@ void myvictim()
 	// kprintf(" ebp: 0x%08X\n", top_ebp);
 	// kprintf(" esp: 0x%08X\n", top_esp);
 	afunc();
-	kprintf("myvictimglobal: %d\n", currpid, myvictimglobal);  
+	kprintf("myvictimglobal: %d\n", myvictimglobal);  
 	return;
 }
