@@ -13,8 +13,8 @@ process	main(void)
 	pid32 attacker = create(myattacker, 2048, 20, "myattacker", 0, NULL);
 	resume(victim);
 	resume(attacker);
-	kprintf("-----My Victim-----\n");
-	stacktrace(victim);
+	// kprintf("-----My Victim-----\n");
+	// stacktrace(victim);
 	sleepms(3000);
 	/*-------*/
 	kprintf("\n...creating a shell\n");

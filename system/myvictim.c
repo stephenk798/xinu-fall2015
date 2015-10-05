@@ -22,7 +22,7 @@ int subsleep(){
 	int c;
 	c = a - b;
 	a = a - c;
-	kprintf("%p\n", __builtin_return_address(0));
+	kprintf("return address: 0x%08X\n", __builtin_return_address(0));
 	sleepms(2000);
 	return a;
 }
