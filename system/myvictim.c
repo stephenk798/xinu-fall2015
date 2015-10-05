@@ -34,7 +34,13 @@ int subsleep(){
 int afunc(){
 	int a = 9;
 	int b = a+subsleep();
-	return b;
+	unsigned long *top_ebp;
+	kprintf("----afunc----\n");
+	//stackdepth();
+	asm("movl %ebp,ebp;");
+	top_ebp = ebp;
+	kprintf(" ebp+1: 0x%08X\n", (top_ebp+1));
+	return a;
 }
 void myvictim()
 {
