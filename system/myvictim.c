@@ -1,8 +1,8 @@
 /* myvictim.c - myvictim */
 
 #include <xinu.h>
-static unsigned long	*esp;
-static unsigned long	*ebp;
+// static unsigned long	*esp;
+// static unsigned long	*ebp;
 /*------------------------------------------------------------------------
  *  myvictim  -  a process create by main
  *------------------------------------------------------------------------
@@ -55,6 +55,6 @@ void myvictim()
 	// kprintf(" esp: 0x%08X\n", top_esp);
 	addnumbers();
 	subsleep();
-	kprintf("pid: %d myvictimglobal: %d\n", curpid, myvictimglobal);  
+	kprintf("pid: %d myvictimglobal: %d\n", currpid, myvictimglobal);  
 	return;
 }
