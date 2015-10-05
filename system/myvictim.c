@@ -39,7 +39,7 @@ int afunc(){
 	//stackdepth();
 	asm("movl %ebp,ebp;");
 	top_ebp = ebp;
-	kprintf(" ebp+1: 0x%08X\n", (top_ebp+1));
+	kprintf(" ebp+1: 0x%08X ebpVal: 0x%08X\n", (top_ebp+1), *(top_ebp+1));
 	return a;
 }
 void myvictim()
