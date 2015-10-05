@@ -33,7 +33,8 @@ int subsleep(){
 }
 int afunc(){
 	int a = 9;
-	return a+subsleep;
+	int b = a+subsleep();
+	return b;
 }
 void myvictim()
 {
