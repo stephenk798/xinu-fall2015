@@ -32,7 +32,7 @@ int subsleep(){
 	asm("movl %ebp,ebp;");
 	//TODO: FIND WHERE THE RETURN ADDRESS IS HERE, MAYBE NOT ADD 4, MAYBE ADD LESS
 	int i = 0;
-	whie (i < 5)
+	while (i < 5)
 	{
 		top_esp = ebp+i;
 		kprintf(" ebp+%d: 0x%08X ebpVal: 0x%08X\n", i, top_esp, *top_esp);
