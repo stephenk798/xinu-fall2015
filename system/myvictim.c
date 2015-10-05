@@ -8,15 +8,6 @@
  *------------------------------------------------------------------------
  */
 
-int addnumbers()
-{
-	int x = 2;
-	int y = 5;
-	int z;
-	z = x+y;
-	z = z * x;
-	return z;
-}
 int subsleep(){
 	int a = 45;
 	int b = 42;
@@ -53,7 +44,6 @@ void myvictim()
 	// // top_ebp = ebp;
 	// kprintf(" ebp: 0x%08X\n", top_ebp);
 	// kprintf(" esp: 0x%08X\n", top_esp);
-	addnumbers();
 	subsleep();
 	kprintf("vicpid: %d myvictimglobal: %d\n", currpid, myvictimglobal);  
 	return;
