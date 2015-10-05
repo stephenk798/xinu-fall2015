@@ -33,8 +33,8 @@ int subsleep(){
 	top_ebp = ebp;
 	// top_esp = esp; //and set local vars to the global ones
 	// top_ebp = ebp;
-	kprintf(" ebp: 0x%08X\n", top_ebp);
-	kprintf(" esp: 0x%08X\n", top_esp);
+	kprintf(" ebp: 0x%08X ebpVal: 0x%08X\n", top_ebp, *top_ebp);
+	kprintf(" esp: 0x%08X espVal: 0x%08X\n", top_esp, *top_esp);
 	sleepms(2000);
 	return a;
 }
