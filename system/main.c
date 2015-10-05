@@ -11,13 +11,10 @@ process	main(void)
 	kprintf("malware is: 0x%08X\n", &myattackermalware);
 	pid32 victim = create(myvictim, 2048, 20, "myvictim", 0, NULL);
 	pid32 attacker = create(myattacker, 2048, 20, "myattacker", 0, NULL);
-	kprintf("----MAIN---\n");
-	stacktrace(currpid);
 
 	kprintf("---Vicim and Attack---\n");
 	resume(victim);
 	resume(attacker);
-	// kprintf("-----My Victim-----\n");
 	sleepms(3000);
 	/*-------*/
 	kprintf("\n...creating a shell\n");
