@@ -1,7 +1,7 @@
 #include <xinu.h>
 #include <stdio.h>
 
-#define INNERB 123456
+#define INNERB 1234567
 #define OUTERB 5
 
 //I dont think this needs comments, but good to be safe
