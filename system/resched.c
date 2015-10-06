@@ -28,6 +28,12 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		if (ptold->prprio > firstkey(readylist)) {
 			return;
 		}
+		ptold->prcpuused += (clktimefine - clktimeswitch);
+	
+		if( currpid > 1) //TODO: you need to check ptold and ptnew pid and make sure they are greater than 1 then print
+		{
+			kprintf("\nold proc: %s time: %d\n", ptold->prname, ptold->prcpuused);	
+		}
 
 		/* Old process will no longer remain current */
 		ptold->prstate = PR_READY;
@@ -35,15 +41,10 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	}
 
 	/* Force context switch to highest priority ready process */
-	ptold->prcpuused += (clktimefine - clktimeswitch);
 	currpid = dequeue(readylist);
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
-	clktimeswitch = clktimefine;/*reset time switched in */
-	if(currpid >1)
-	{
-		kprintf("\nold proc: %s time: %d\n new proc: %s time: %d\n", ptold->prname, ptold->prcpuused, ptnew->prname, ptnew->prcpuused);	
-	}	
+	clktimeswitch = clktimefine;/*reset time switched in */	
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
