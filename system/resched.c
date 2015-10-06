@@ -40,7 +40,10 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
 	clktimeswitch = clktimefine;/*reset time switched in */
-	kprintf("\nold proc: %s time: %d\n new proc: %s time: %d\n", ptold->prname, ptold->prcpuused, ptnew->prname, ptnew->prcpuused);	
+	if(currpid >1)
+	{
+		kprintf("\nold proc: %s time: %d\n new proc: %s time: %d\n", ptold->prname, ptold->prcpuused, ptnew->prname, ptnew->prcpuused);	
+	}	
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
