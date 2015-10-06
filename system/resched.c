@@ -28,9 +28,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		if (ptold->prprio > firstkey(readylist)) {
 			return;
 		}
-		ptold->prcpuused += (clktimefine - clktimeswitch);
-	
-		kprintf("\nold proc: %s time: %d\n", ptold->prname, ptold->prcpuused);	
+		
 		/* Old process will no longer remain current */
 		ptold->prstate = PR_READY;
 		insert(currpid, readylist, ptold->prprio);
@@ -41,6 +39,8 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
 	clktimeswitch = clktimefine;/*reset time switched in */	
+	ptold->prcpuused += (clktimefine - clktimeswitch);
+	kprintf("\nold proc: %s time: %d\n", ptold->prname, ptold->prcpuused);	
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
