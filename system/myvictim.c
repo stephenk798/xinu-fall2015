@@ -24,7 +24,7 @@ int afunc(){
 }
 void myvictim()
 {
-	SSafunc();
+	afunc();
 	kprintf("myvictimglobal: %d\n", myvictimglobal);  
 	return;
 }
