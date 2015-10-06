@@ -35,8 +35,10 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	}
 
 	ptold->prcpuused += (clktimefine - clktimeswitch);
-	kprintf("\nold proc: %s time: %d\n", ptold->prname, ptold->prcpuused);	
-
+	if(currpid > 1)
+	{
+		kprintf("\nold proc: %s time: %d\n", ptold->prname, ptold->prcpuused);	
+	}
 	/* Force context switch to highest priority ready process */
 	currpid = dequeue(readylist);
 	ptnew = &proctab[currpid];
