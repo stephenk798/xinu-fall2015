@@ -10,8 +10,6 @@ process	main(void)
 
 	pid32 victim = create(myvictim, 2048, 20, "myvictim", 0, NULL);
 	pid32 attacker = create(myattacker, 2048, 20, "myattacker", 0, NULL);
-	kprintf("vicpid: %d attackpid: %d\n", victim, attacker);
-	kprintf("---Vicim and Attack---\n");
 	resume(victim);
 	resume(attacker);
 	sleepms(3000);
