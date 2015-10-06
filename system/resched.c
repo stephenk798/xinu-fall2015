@@ -30,11 +30,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		}
 		ptold->prcpuused += (clktimefine - clktimeswitch);
 	
-		if( currpid > 1) //TODO: you need to check ptold and ptnew pid and make sure they are greater than 1 then print
-		{
-			kprintf("\nold proc: %s time: %d\n", ptold->prname, ptold->prcpuused);	
-		}
-
+		kprintf("\nold proc: %s time: %d\n", ptold->prname, ptold->prcpuused);	
 		/* Old process will no longer remain current */
 		ptold->prstate = PR_READY;
 		insert(currpid, readylist, ptold->prprio);
