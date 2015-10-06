@@ -14,8 +14,8 @@ process	main(void)
 	// resume(attacker);
 	pid32 procA = create(printloop, 1024, 20, "procA", 1, 'A');
 	pid32 procB = create(printloop, 1024, 20, "procB", 1, 'B');
-	pid32 procC = create(printloop, 1024, 20, "procC", 1, 'C');
-	pid32 procD = create(printloop, 1024, 20, "procD", 1, 'D');
+	pid32 procC = create(printloop, 1024, 50, "procC", 1, 'C');
+	pid32 procD = create(printloop, 1024, 50, "procD", 1, 'D');
 
 	kprintf("P");
 	resume(procA);
