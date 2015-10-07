@@ -3,13 +3,13 @@
 #include <xinu.h>
 
 /*------------------------------------------------------------------------
- *  insert  -  Insert a process into a queue in descending key order
+ *  insert  -  Insert a process into a queue in ascending key order
  *------------------------------------------------------------------------
  */
 status	insert(
 	  pid32		pid,		/* ID of process to insert	*/
 	  qid16		q,		/* ID of queue to use		*/
-	  int32		key		/* Key for the inserted process	*/
+	  uint32		key		/* Key for the inserted process (is actually cpu time of process)	*/
 	)
 {
 	int16	curr;			/* Runs through items in a queue*/
@@ -20,7 +20,7 @@ status	insert(
 	}
 
 	curr = firstid(q);
-	while (queuetab[curr].qkey >= key) {
+	while (queuetab[curr].qkey <= key) {
 		curr = queuetab[curr].qnext;
 	}
 

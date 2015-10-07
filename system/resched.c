@@ -31,7 +31,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		
 		/* Old process will no longer remain current */
 		ptold->prstate = PR_READY;
-		insert(currpid, readylist, ptold->prprio);
+		insert(currpid, readylist, ptold->prcpuused);
 	}
 
 	ptold->prcpuused += (clktimefine - clktimeswitch);
