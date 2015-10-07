@@ -36,7 +36,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		insert(currpid, readylist, ptold->prcpuused);
 	}
 
-	//kprintf("\nproc: %s time: %d\n", ptold->prname, ptold->prcpuused);	
+	kprintf("\nproc: %s time: %d\n", ptold->prname, ptold->prcpuused);	
 	/* Force context switch to highest priority ready process */
 	currpid = dequeue(readylist);
 	ptnew = &proctab[currpid];
