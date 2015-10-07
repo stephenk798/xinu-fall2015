@@ -12,18 +12,18 @@ process	main(void)
 	// pid32 attacker = create(myattacker, 2048, 20, "myattacker", 0, NULL);
 	// resume(victim);
 	// resume(attacker);
-	pid32 procA = create(printloop, 1024, 20, "procA", 1, 'A');
-	pid32 procB = create(printloop, 1024, 20, "procB", 1, 'B');
-	pid32 procC = create(printloop, 1024, 50, "procC", 1, 'C');
-	pid32 procD = create(printloop, 1024, 50, "procD", 1, 'D');
+	pid32 procA = create(cpuintensive, 1024, 20, "procA", 0, NULL);
+	pid32 procB = create(cpuintensive, 1024, 20, "procB", 0, NULL);
+	pid32 procC = create(cpuintensive, 1024, 50, "procC", 0, NULL);
+	pid32 procD = create(cpuintensive, 1024, 50, "procD", 0, NULL);
 
-	kprintf("P");
+	
 	resume(procA);
-	kprintf("P");
+	
 	resume(procB);
-	kprintf("P");
+	
 	resume(procC);
-	kprintf("P");
+	
 	resume(procD);
 	sleepms(200);
 	/*-------*/
