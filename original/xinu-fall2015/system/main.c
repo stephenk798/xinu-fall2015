@@ -3,17 +3,51 @@
 #include <xinu.h>
 #include <stdio.h>
 
+void bob(){
+	kprintf("bob\n");
+	stackdepth();
+}
+
 process	main(void)
 {
-	kprintf("\nHello World!\n");
-	kprintf("\nI'm the first XINU app and running function main() in system/main.c.\n");
-	kprintf("\nI was created by nulluser() in system/initialize.c using create().\n");
-	kprintf("\nMy creator will turn itself into the do-nothing null process.\n");
-	kprintf("\nI will create a second XINU app that runs shell() in shell/shell.c as an example.\n");
-	kprintf("\nYou can do something else, or do nothing; it's completely up to you.\n");
+	/*Moved hello world message to intialize.c on 9/1/15*/
+
+	/*test code for lab 1, host2netl and printsegaddress*/
+
+	// stacktrace(currpid);
+
+	// kprintf("-----Stack depth test-----\n");
+	// stackdepth();
+
+	// kprintf("-----DOne-----\n");
+
+	// kprintf("0x12345678 turns into 0x%08X\n", host2netl(0x12345678));
+	// resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
+	// kprintf("\n");
+	// sleepms(300);
+
+	pid32 procA = create(printnoloop, 1024, 24, "printnoloop", 1, 'A');
+	pid32 procB = create(printnoloop, 1024, 23, "printnoloop", 1, 'B');
+	pid32 procC = create(printnoloop, 1024, 22, "printnoloop", 1, 'C');
+	pid32 procD = create(printnoloop, 1024, 21, "printnoloop", 1, 'D');
+
+	kprintf("P");
+	resume(procA);
+	kprintf("P");
+	resume(procB);
+	kprintf("P");
+	resume(procC);
+	kprintf("P");
+	resume(procD);
+	stackdepth();
+	sleepms(10000);
+	kprintf("\n");
+	sleepms(200);
+	/*-------*/
 	kprintf("\n...creating a shell\n");
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
+	
 
 	/* Wait for shell to exit and recreate it */
 
