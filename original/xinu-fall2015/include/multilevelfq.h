@@ -1,4 +1,4 @@
-struct mlfqueue{
+struct	mlfqueue  {
 	qid16	queues[DISPTBSIZE];	/* different level queues*/
 };
 
