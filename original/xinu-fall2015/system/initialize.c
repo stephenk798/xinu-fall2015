@@ -33,7 +33,7 @@ void initTSTable(){
 	int i;
 	for(i = 0 ; i < DISPTBSIZE; i++){
 		//initialize all levels of mlfqueue
-		mlfprocqueue.queues[i] = newqueue(); 
+		mlfprocqueue[i] = newqueue(); 
 
 		tsdtab[i].ts_tqexp = i-10;
 		if(i < 10){

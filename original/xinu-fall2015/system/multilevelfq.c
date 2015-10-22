@@ -1,36 +1,35 @@
 #include <xinu.h>
 
-struct mlfqueue mlfprocqueue;
+qid16 mlfprocqueue[DISPTBSIZE];
 
 pid32 mlfqinsert(
 		pid32 pid,
-		struct mlfqueue *q,
 		int32		key		/* Key for the inserted process	*/
 	)
 {
 	kprintf("mlfqinserted %d\n", pid);
-	enqueue(pid, q->queues[key]);
+	enqueue(pid, mlfprocqueue[key]);
 	return pid;
 }
 
 //if nothing is found in the loop by deque, thats REALLY BAD, so we default to returning NULLPROC to be safe.
-pid32 mlfqdequeue(struct mlfqueue *q)
+pid32 mlfqdequeue()
 {
 	int i;
 	for(i = DISPTBSIZE-1; i >=0; i--){
-		if(!isempty(q->queues[i])){
-			return dequeue(q->queues[i]);
+		if(!isempty(mlfprocqueue[i])){
+			return dequeue(mlfprocqueue[i]);
 		}
 	}
 	return NULLPROC;
 }
 
-bool8 mlfqisempty(struct mlfqueue *q){
+bool8 mlfqisempty(){
 	int i;
 	for(i = DISPTBSIZE-1; i >=0; i--){
-		if(!isempty(q->queues[i])){
-			return isempty(q->queues[i]);
+		if(!isempty(mlfprocqueue[i])){
+			return isempty(mlfprocqueue[i]);
 		}
 	}
-	return isempty(q->queues[0]);
+	return isempty(mlfprocqueue[0]);
 }
