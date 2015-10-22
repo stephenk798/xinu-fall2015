@@ -3,8 +3,8 @@
 struct mlfqueue mlfprocqueue;
 
 pid32 mlfqinsert(
-		struct mlfqueue q, 
 		pid32 pid,
+		struct mlfqueue q,
 		int32		key		/* Key for the inserted process	*/
 	)
 {
