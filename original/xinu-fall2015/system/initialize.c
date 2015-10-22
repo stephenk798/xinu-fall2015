@@ -238,6 +238,9 @@ static	void	sysinit()
 
 	readylist = newqueue();
 
+	/* Initialize Time Share dispatch table */
+	initTSTable();
+	
 	/* Initialize the real time clock */
 
 	clkinit();
@@ -246,8 +249,6 @@ static	void	sysinit()
 		init(i);
 	}
 
-	/* Initialize Time Share dispatch table */
-	initTSTable();
 	return;
 }
 
