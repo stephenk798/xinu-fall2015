@@ -3,11 +3,6 @@
 #include <xinu.h>
 #include <stdio.h>
 
-void bob(){
-	kprintf("bob\n");
-	stackdepth();
-}
-
 process	main(void)
 {
 	/*Moved hello world message to intialize.c on 9/1/15*/
