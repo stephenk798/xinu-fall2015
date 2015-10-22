@@ -8,7 +8,7 @@ pid32 mlfqinsert(
 		int32		key		/* Key for the inserted process	*/
 	)
 {
-	kprintf("mlfqinserted %d\n", key);
+	kprintf("mlfqinserted %d\n", pid);
 	enqueue(pid, q->queues[key]);
 	return pid;
 }

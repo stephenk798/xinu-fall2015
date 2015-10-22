@@ -41,6 +41,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
+		kprintf("inserting old cpu proc\n");
 		mlfqinsert(currpid, &mlfprocqueue, ptold->prprio);
 	}
 
@@ -50,6 +51,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptnew = &proctab[currpid];
 	//Check if NULL process and make sure there are no other processes to run
 	if(currpid == NULLPROC && !mlfqisempty(&mlfprocqueue)){
+		kprintf("reinsert null proc\n");
 		mlfqinsert(currpid, &mlfprocqueue, ptnew->prprio);
 		currpid = mlfqdequeue(&mlfprocqueue);
 		ptnew = &proctab[currpid];
