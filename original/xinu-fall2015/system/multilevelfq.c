@@ -7,7 +7,9 @@ pid32 mlfqinsert(
 		int32		key		/* Key for the inserted process	*/
 	)
 {
-	kprintf("mlfqinserted %d\n", pid);
+	struct procent *ptold;
+	ptold = &proctab[pid];
+	kprintf("proc name: %s\n", ptold->name);
 	enqueue(pid, mlfprocqueue[key]);
 	return pid;
 }
