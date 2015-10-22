@@ -133,26 +133,8 @@ void	nulluser()
 
 	enable();
 
-	/*Moved welcome message from main.c to here on 9/1/15*/
-	kprintf("\nWelcome!\n");
-	/*Dope name thing added 9/7/15*/
-	kprintf("\n\n%s%s\n%s\n%s\n%s\n%s\n%s\n",WELCOME_BAN0, WELCOME_BAN1, WELCOME_BAN2, WELCOME_BAN3, WELCOME_BAN4, WELCOME_BAN5, WELCOME_BAN6, WELCOME_BAN7);
-	kprintf("\n\033[0;97m I was modified by Stephen Kramer, kramer40!\n");
-	kprintf("\nI am being printed from nulluser()in system/intialize.c.\n");
-	kprintf("\nEventually I will turn into the do-nothing null process, and thats okay.\n");
-	kprintf("\nI'm gonna cal the main function using create, which will be the first app\n");
-	kprintf("\nThat app will create a second XINU app that runs shell in shell/shell.c.\n");
-	/*
-	kprintf("\nHello World!\n");
-	kprintf("\nI'm the first XINU app and running function main() in system/main.c.\n");
-	kprintf("\nI was created by nulluser() in system/initialize.c using create().\n");
-	kprintf("\nMy creator will turn itself into the do-nothing null process.\n");
-	kprintf("\nI will create a second XINU app that runs shell() in shell/shell.c as an example.\n");
-	kprintf("\nYou can do something else, or do nothing; it's completely up to you.\n");
-	*/
-	
-
 	/* Create a process to execute function main() */
+
 	resume (
 	   create((void *)main, INITSTK, INITPRIO, "Main process", 0,
            NULL));

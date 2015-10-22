@@ -213,14 +213,6 @@ extern	void	netstart(void);
 
 extern	syscall	kill(pid32);
 
-/*added 9/2/15*/
-/* in file lab0app1.c*/
-extern 	process lab0app1();
-
-/*added 9/7/15*/
-/*in file lab0app2.c*/
-extern process lab0app2();
-
 /* in file lexan.c */
 
 extern	int32	lexan(char *, int32, char *, int32 *, int32 [], int32 []);
