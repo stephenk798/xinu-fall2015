@@ -20,11 +20,68 @@ extern	void meminit(void);	/* Initializes the free memory list	*/
 struct	procent	proctab[NPROC];	/* Process table			*/
 struct	sentry	semtab[NSEM];	/* Semaphore table			*/
 struct	memblk	memlist;	/* List of free memory blocks		*/
+struct ts_disptb tsdtab[DISPTBSIZE];
 
 /* Active system status */
 
 int	prcount;		/* Total number of live processes	*/
 pid32	currpid;		/* ID of currently executing process	*/
+
+
+/*Initialize the Time Share dispatch table*/
+void initTSTable(){
+	int i;
+	for(i = 0 ; i < DISPTBSIZE; i++){
+		//initialize all levels of mlfqueue
+		mlfprocqueue.queues[i] = newqueue(); 
+
+		tsdtab[i].ts_tqexp = i-10;
+		if(i < 10){
+			tsdtab[i].ts_tqexp = 0;
+			tsdtab[i].ts_slpret = 50;
+			tsdtab[i].ts_quantum = 200;
+		}
+		else if(i < 20){
+			tsdtab[i].ts_slpret = 51;
+			tsdtab[i].ts_quantum = 160;
+		}
+		else if(i < 30){
+			tsdtab[i].ts_slpret = 52;
+			tsdtab[i].ts_quantum = 120;
+		}
+		else if(i < 35){
+			tsdtab[i].ts_slpret = 53;
+			tsdtab[i].ts_quantum = 80;
+		}
+		else if(i < 40){
+			tsdtab[i].ts_slpret = 54;
+			tsdtab[i].ts_quantum = 80;
+		}
+		else if(i < 50){
+			if(i < 45){
+				tsdtab[i].ts_slpret = 55;
+			}
+			else if (i == 45){
+				tsdtab[i].ts_slpret = 56;
+			}
+			else if (i == 46){
+				tsdtab[i].ts_slpret = 57;
+			}
+			else{
+				tsdtab[i].ts_slpret = 58;
+			}				
+			tsdtab[i].ts_quantum = 40;
+		}
+		else if (i < 59){
+			tsdtab[i].ts_slpret = 58;
+			tsdtab[i].ts_quantum = 40;
+		}
+		else if (i == 59){
+			tsdtab[i].ts_slpret = 59;
+			tsdtab[i].ts_quantum = 20;
+		}
+	}
+}
 
 /*------------------------------------------------------------------------
  * nulluser - initialize the system and become the null process
@@ -188,6 +245,9 @@ static	void	sysinit()
 	for (i = 0; i < NDEVS; i++) {
 		init(i);
 	}
+
+	/* Initialize Time Share dispatch table */
+	initTSTable();
 	return;
 }
 

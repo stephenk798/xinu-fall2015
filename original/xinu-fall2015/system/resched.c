@@ -24,23 +24,38 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	ptold = &proctab[currpid];
 
-	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
-		if (ptold->prprio > firstkey(readylist)) {
-			return;
+	// If state is SLEEP it is IO, if is CURR then it is CPU
+	if (ptold->prstate == PR_SLEEP){
+		ptold->prprio = tsdtab[ptold->prpio].ts_slpret;
+	}
+	else if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
+		
+		if(currpid != NULLPROC){
+			ptold->prpio = tsdtab[ptold->prpio].ts_tqexp;
 		}
+
+		// if (ptold->prprio > firstkey(readylist)) {
+		// 	return;
+		// }
 
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
-		insert(currpid, readylist, ptold->prprio);
+		mlfqinsert(currpid, mlfprocqueue, ptold->prprio);
 	}
 
 	/* Force context switch to highest priority ready process */
 
-	currpid = dequeue(readylist);
+	currpid = mlfqdequeue(mlfprocqueue);
 	ptnew = &proctab[currpid];
+	//Check if NULL process and make sure there are no other processes to run
+	if(currpid == NULLPROC && !mlfqisempty(mlfprocqueue)){
+		mlfqinsert(currpid, mlfprocqueue, ptnew->prpio);
+		currpid = mlfqdequeue(mlfprocqueue);
+		ptnew = &proctab[currpid];
+	}
 	ptnew->prstate = PR_CURR;
-	preempt = QUANTUM;		/* Reset time slice for process	*/
+	preempt = tsdtab[ptnew->prpio].ts_quantum;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */
