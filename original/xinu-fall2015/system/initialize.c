@@ -103,7 +103,7 @@ void	nulluser()
 	uint32	free_mem;		/* Total amount of free memory	*/
 	
 	/* Initialize the system */
-		
+
 	sysinit();
 
 	kprintf("\n\r%s\n\n\r", VERSION);
@@ -237,9 +237,6 @@ static	void	sysinit()
 	/* Create a ready list for processes */
 
 	readylist = newqueue();
-
-	/* Initialize Time Share dispatch table */
-	initTSTable();
 	
 	/* Initialize the real time clock */
 
@@ -248,6 +245,10 @@ static	void	sysinit()
 	for (i = 0; i < NDEVS; i++) {
 		init(i);
 	}
+
+	/* Initialize Time Share dispatch table */
+	initTSTable();
+
 	kprintf("finished initializing\n");
 
 	return;
