@@ -9,7 +9,7 @@ pid32 mlfqinsert(
 {
 	struct procent *ptold;
 	ptold = &proctab[pid];
-	kprintf("proc name: %s\n", ptold->name);
+	kprintf("proc name: %s\n", ptold->prname);
 	enqueue(pid, mlfprocqueue[key]);
 	return pid;
 }
