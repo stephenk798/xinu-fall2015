@@ -41,17 +41,17 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
-		mlfqinsert(currpid, mlfprocqueue, ptold->prprio);
+		mlfqinsert(currpid, &mlfprocqueue, ptold->prprio);
 	}
 
 	/* Force context switch to highest priority ready process */
 
-	currpid = mlfqdequeue(mlfprocqueue);
+	currpid = mlfqdequeue(&mlfprocqueue);
 	ptnew = &proctab[currpid];
 	//Check if NULL process and make sure there are no other processes to run
-	if(currpid == NULLPROC && !mlfqisempty(mlfprocqueue)){
-		mlfqinsert(currpid, mlfprocqueue, ptnew->prprio);
-		currpid = mlfqdequeue(mlfprocqueue);
+	if(currpid == NULLPROC && !mlfqisempty(&mlfprocqueue)){
+		mlfqinsert(currpid, &mlfprocqueue, ptnew->prprio);
+		currpid = mlfqdequeue(&mlfprocqueue);
 		ptnew = &proctab[currpid];
 	}
 	ptnew->prstate = PR_CURR;
