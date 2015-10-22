@@ -17,7 +17,7 @@ pid32 mlfqdequeue(struct mlfqueue q)
 {
 	int i;
 	for(i = DISPTBSIZE-1; i >=0; i--){
-		if(!isempty(q.queues[i]){
+		if(!isempty(q.queues[i])){
 			return dequeue(q.queues[i]);
 		}
 	}
@@ -28,8 +28,8 @@ bool8 mlfqisempty(struct mlfqueue q){
 	int i;
 	for(i = DISPTBSIZE-1; i >=0; i--){
 		if(!isempty(q.queues[i])){
-			return false;
+			return isempty(q.queues[i]);
 		}
 	}
-	return true;
+	return isempty(q.queues[0]);
 }
