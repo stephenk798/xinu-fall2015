@@ -248,6 +248,7 @@ static	void	sysinit()
 	for (i = 0; i < NDEVS; i++) {
 		init(i);
 	}
+	kprintf("finished initializing\n");
 
 	return;
 }
