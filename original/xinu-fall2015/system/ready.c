@@ -22,6 +22,7 @@ status	ready(
 
 	prptr = &proctab[pid];
 	prptr->prstate = PR_READY;
+	kprintf("proc is ready\n");
 	mlfqinsert(pid, mlfprocqueue, prptr->prprio);
 	resched();
 
