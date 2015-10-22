@@ -103,7 +103,6 @@ void	nulluser()
 	uint32	free_mem;		/* Total amount of free memory	*/
 	
 	/* Initialize the system */
-	kprintf("ARe we even in null user yet\n");
 		
 	sysinit();
 
