@@ -48,7 +48,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	}
 
 	/* Force context switch to highest priority ready process */
-
+	kprintf("Inserted proc: %s\n", ptold->prname);
 	currpid = mlfqdequeue();
 	ptnew = &proctab[currpid];
 	//Check if NULL process and make sure there are no other processes to run
