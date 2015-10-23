@@ -7,8 +7,8 @@ pid32 mlfqinsert(pid32 pid, int32 key){
 
 pid32 mlfqdequeue(){
 	pid32 currpid;
-	int i = DISPTBSIZE -1;
-	while(i >= 0){
+	int i;
+	for( i = DISPTBSIZE-1; i >= 0; i--){
 		if(!isempty(mlfprocqueue[i])){
 			currpid = dequeue(mlfprocqueue[i]);
 			if (currpid == NULLPROC){
@@ -19,7 +19,6 @@ pid32 mlfqdequeue(){
 			}
 			break;
 		}
-		i--;
 	}
 	return currpid;
 }
