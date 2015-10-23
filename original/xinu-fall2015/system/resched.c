@@ -65,6 +65,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		mlfqlevel--;
 	}
 	ptnew = &proctab[currpid];
+	kprintf("new proc is: %s\n", ptnew->prname);
 	//Check if NULL process and make sure there are no other processes to run
 	if(currpid == NULLPROC && !mlfqisempty()){
 		kprintf("reinsert null proc\n");
