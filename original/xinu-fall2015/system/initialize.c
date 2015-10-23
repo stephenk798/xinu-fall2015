@@ -239,9 +239,9 @@ static	void	sysinit()
 	/* Create a ready list for processes */
 
 	readylist = newqueue();
-	for(i = 0; i < DISPTBSIZE; i++){
-		mlfprocqueue[i] = newqueue();
-	}
+	// for(i = 0; i < DISPTBSIZE; i++){
+	// 	mlfprocqueue[i] = newqueue();
+	// }
 
 	/* Initialize the real time clock */
 
