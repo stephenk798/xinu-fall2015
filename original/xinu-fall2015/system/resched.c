@@ -33,7 +33,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		
 		if(currpid != NULLPROC){
 			tbl = &tstab[ptold->prprio];
-			ptold->prprio = tbl.ts_tqexp;
+			ptold->prprio = tbl->ts_tqexp;
 		}
 
 		// if (ptold->prprio > firstkey(readylist)) {
