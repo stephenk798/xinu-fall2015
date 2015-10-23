@@ -49,7 +49,21 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	/* Force context switch to highest priority ready process */
 	kprintf("Inserted proc: %s\n", ptold->prname);
-	currpid = mlfqdequeue();
+	int mlfqlevel = DISPTBSIZE-1;
+	while(mlfqlevel>=0){
+		if(!(isempty(mlfqueue[mlfqlevel]))){	
+			currpid = dequeue(mlfqueue[mlfqlevel]);
+			if(currpid==NULLPROC){			//if highest priority process is only NULL process then
+				//check there is no other process in the ready list
+				if(!(isempty(mlfqueue[mlfqlevel]))){
+					enqueue(currpid, mlfqueue[mlfqlevel]);	//put the process in the ready list as current and enqueue null in the end
+					currpid = dequeue(mlfqueue[mlfqlevel]);
+				}
+			}
+			break;
+		}
+		mlfqlevel--;
+	}
 	ptnew = &proctab[currpid];
 	//Check if NULL process and make sure there are no other processes to run
 	if(currpid == NULLPROC && !mlfqisempty()){
