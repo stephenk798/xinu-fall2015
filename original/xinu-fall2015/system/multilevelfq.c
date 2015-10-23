@@ -1,3 +1,5 @@
+#include <xinu.h>
+
 pid32 mlfqinsert(pid32 pid, int32 key){
 	enqueue(pid, mlfprocqueue[key]);
 	return pid;
