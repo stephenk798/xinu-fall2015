@@ -43,12 +43,11 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
-		kprintf("inserting old cpu proc\n");
 		enqueue(currpid, mlfprocqueue[ptold->prprio]);
 	}
 
 	/* Force context switch to highest priority ready process */
-	kprintf("Inserted proc: %s\n", ptold->prname);
+	kprintf("Old proc: %s, priority: %d\n", ptold->prname, ptold->prprio);
 	int mlfqlevel = DISPTBSIZE-1;
 	while(mlfqlevel>=0){
 		if(!(isempty(mlfprocqueue[mlfqlevel]))){	
