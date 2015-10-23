@@ -60,12 +60,13 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 					currpid = dequeue(mlfprocqueue[mlfqlevel]);
 				}
 			}
+			kprintf("broke at level %d\n", mlfqlevel);
 			break;
 		}
 		mlfqlevel--;
 	}
 	ptnew = &proctab[currpid];
-	kprintf("new proc is: %s\n", ptnew->prname);
+	kprintf("new proc pid: %d name is: %s\n", currpid, ptnew->prname);
 	//Check if NULL process and make sure there are no other processes to run
 	if(currpid == NULLPROC && !mlfqisempty()){
 		kprintf("reinsert null proc\n");
