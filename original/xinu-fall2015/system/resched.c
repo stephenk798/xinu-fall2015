@@ -43,7 +43,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	else if(ptold->prstate == PR_CURR){
 		//if it is current it is CPU
 		if(currpid != NULLPROC){
-			ptold->prpio = level->ts_tqexp;
+			ptold->prprio = level->ts_tqexp;
 		}
 
 		ptold->prstate = PR_READY;
