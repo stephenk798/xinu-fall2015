@@ -20,6 +20,7 @@ process	main(void)
 	// resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
 	// kprintf("\n");
 	// sleepms(300);
+
 	pid32 procA = create(printnoloop, 1024, 24, "printnoloop", 1, 'A');
 	pid32 procB = create(printnoloop, 1024, 23, "printnoloop", 1, 'B');
 	pid32 procC = create(printnoloop, 1024, 22, "printnoloop", 1, 'C');

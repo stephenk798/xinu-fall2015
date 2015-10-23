@@ -24,63 +24,16 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	ptold = &proctab[currpid];
 
-<<<<<<< HEAD
-	// If state is SLEEP it is IO, if is CURR then it is CPU
-	if (ptold->prstate == PR_SLEEP){
-		tbl = &tsdtab[ptold->prprio];
-		ptold->prprio = tbl->ts_slpret;
-	}
-	else if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
-		
-		if(currpid != NULLPROC){
-			tbl = &tsdtab[ptold->prprio];
-			ptold->prprio = tbl->ts_tqexp;
-=======
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		if (ptold->prprio > firstkey(readylist)) {
 			return;
->>>>>>> parent of d911d6a... lab3 part3 setup
+
 		}
 
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
-<<<<<<< HEAD
-		enqueue(currpid, mlfprocqueue[ptold->prprio]);
-	}
 
-	/* Force context switch to highest priority ready process */
-	kprintf("Old proc: %s, priority: %d\n", ptold->prname, ptold->prprio);
-	int mlfqlevel = DISPTBSIZE-1;
-	while(mlfqlevel>=0){
-		if(!(isempty(mlfprocqueue[mlfqlevel]))){	
-			currpid = dequeue(mlfprocqueue[mlfqlevel]);
-			if(currpid==NULLPROC){			//if highest priority process is only NULL process then
-				//check there is no other process in the ready list
-				if(!(isempty(mlfprocqueue[mlfqlevel]))){
-					enqueue(currpid, mlfprocqueue[mlfqlevel]);	//put the process in the ready list as current and enqueue null in the end
-					currpid = dequeue(mlfprocqueue[mlfqlevel]);
-				}
-			}
-			kprintf("broke at level %d\n", mlfqlevel);
-			break;
-		}
-		mlfqlevel--;
-	}
-	ptnew = &proctab[currpid];
-	kprintf("new proc pid: %d name is: %s\n", currpid, ptnew->prname);
-	//Check if NULL process and make sure there are no other processes to run
-	if(currpid == NULLPROC && !mlfqisempty()){
-		kprintf("reinsert null proc\n");
-		enqueue(currpid, mlfprocqueue[ptnew->prprio]);
-		currpid = mlfqdequeue();
-		ptnew = &proctab[currpid];
-	}
-	tbl = &tsdtab[ptnew->prprio];
-
-	ptnew->prstate = PR_CURR;
-	preempt = tbl->ts_quantum;		/* Reset time slice for process	*/
-=======
 		insert(currpid, readylist, ptold->prprio);
 	}
 
@@ -90,7 +43,6 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
->>>>>>> parent of d911d6a... lab3 part3 setup
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */
