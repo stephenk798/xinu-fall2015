@@ -5,37 +5,23 @@
 
 process	main(void)
 {
-	/*Moved hello world message to intialize.c on 9/1/15*/
+	// pid32 victim = create(myvictim, 2048, 20, "myvictim", 0, NULL);
+	// pid32 attacker = create(myattacker, 2048, 20, "myattacker", 0, NULL);
+	// resume(victim);
+	// resume(attacker);
+	pid32 procA = create(cpuintensive, 1024, 1, "procA", 0, NULL);
+	pid32 procB = create(cpuintensive, 1024, 1, "procB", 0, NULL);
+	pid32 procC = create(cpuintensive, 1024, 1, "procC", 0, NULL);
+	pid32 procD = create(cpuintensive, 1024, 1, "procD", 0, NULL);
 
-	/*test code for lab 1, host2netl and printsegaddress*/
-
-	// stacktrace(currpid);
-
-	// kprintf("-----Stack depth test-----\n");
-	// stackdepth();
-
-	// kprintf("-----DOne-----\n");
-
-	// kprintf("0x12345678 turns into 0x%08X\n", host2netl(0x12345678));
-	// resume(create(printsegaddress, 65536, 20, "printsegaddress", 0, NULL));
-	// kprintf("\n");
-	// sleepms(300);
-
-	pid32 procA = create(printloop, 1024, 24, "printloop", 1, 'A');
-	pid32 procB = create(printloop, 1024, 23, "printloop", 1, 'B');
-	pid32 procC = create(printloop, 1024, 22, "printloop", 1, 'C');
-	pid32 procD = create(printloop, 1024, 21, "printloop", 1, 'D');
-
-	kprintf("P");
+	
 	resume(procA);
-	kprintf("P");
+	
 	resume(procB);
-	kprintf("P");
+	
 	resume(procC);
-	kprintf("P");
+	
 	resume(procD);
-	sleepms(1000);
-	kprintf("\n");
 	sleepms(200);
 	/*-------*/
 	kprintf("\n...creating a shell\n");
