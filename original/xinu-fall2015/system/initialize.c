@@ -31,54 +31,54 @@ pid32	currpid;		/* ID of currently executing process	*/
 /*Initialize the Time Share dispatch table*/
 void initTSTable(){
 	int i;
+	struct ts_disptb *level;
 	for(i = 0 ; i < DISPTBSIZE; i++){
-		//initialize all levels of mlfqueue
-		mlfprocqueue[i] = newqueue(); 
+		level = &tsdtab[i];
 
-		tsdtab[i].ts_tqexp = i-10;
+		level[i].ts_tqexp = i-10;
 		if(i < 10){
-			tsdtab[i].ts_tqexp = 0;
-			tsdtab[i].ts_slpret = 50;
-			tsdtab[i].ts_quantum = 200;
+			level[i].ts_tqexp = 0;
+			level[i].ts_slpret = 50;
+			level[i].ts_quantum = 200;
 		}
 		else if(i < 20){
-			tsdtab[i].ts_slpret = 51;
-			tsdtab[i].ts_quantum = 160;
+			level[i].ts_slpret = 51;
+			level[i].ts_quantum = 160;
 		}
 		else if(i < 30){
-			tsdtab[i].ts_slpret = 52;
-			tsdtab[i].ts_quantum = 120;
+			level[i].ts_slpret = 52;
+			level[i].ts_quantum = 120;
 		}
 		else if(i < 35){
-			tsdtab[i].ts_slpret = 53;
-			tsdtab[i].ts_quantum = 80;
+			level[i].ts_slpret = 53;
+			level[i].ts_quantum = 80;
 		}
 		else if(i < 40){
-			tsdtab[i].ts_slpret = 54;
-			tsdtab[i].ts_quantum = 80;
+			level[i].ts_slpret = 54;
+			level[i].ts_quantum = 80;
 		}
 		else if(i < 50){
 			if(i < 45){
-				tsdtab[i].ts_slpret = 55;
+				level[i].ts_slpret = 55;
 			}
 			else if (i == 45){
-				tsdtab[i].ts_slpret = 56;
+				level[i].ts_slpret = 56;
 			}
 			else if (i == 46){
-				tsdtab[i].ts_slpret = 57;
+				level[i].ts_slpret = 57;
 			}
 			else{
-				tsdtab[i].ts_slpret = 58;
+				level[i].ts_slpret = 58;
 			}				
-			tsdtab[i].ts_quantum = 40;
+			level[i].ts_quantum = 40;
 		}
 		else if (i < 59){
-			tsdtab[i].ts_slpret = 58;
-			tsdtab[i].ts_quantum = 40;
+			level[i].ts_slpret = 58;
+			level[i].ts_quantum = 40;
 		}
 		else if (i == 59){
-			tsdtab[i].ts_slpret = 59;
-			tsdtab[i].ts_quantum = 20;
+			level[i].ts_slpret = 59;
+			level[i].ts_quantum = 20;
 		}
 	}
 }
@@ -103,7 +103,7 @@ void	nulluser()
 	uint32	free_mem;		/* Total amount of free memory	*/
 	
 	/* Initialize the system */
-
+		
 	sysinit();
 
 	kprintf("\n\r%s\n\n\r", VERSION);
@@ -237,7 +237,10 @@ static	void	sysinit()
 	/* Create a ready list for processes */
 
 	readylist = newqueue();
-	
+
+	for (i = 0; i < DISPTBSIZE; i++){
+		mlfprocqueue[i] = newqueue();
+	}
 	/* Initialize the real time clock */
 
 	clkinit();
@@ -245,12 +248,6 @@ static	void	sysinit()
 	for (i = 0; i < NDEVS; i++) {
 		init(i);
 	}
-
-	/* Initialize Time Share dispatch table */
-	initTSTable();
-
-	kprintf("finished initializing\n");
-
 	return;
 }
 

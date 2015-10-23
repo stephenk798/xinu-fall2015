@@ -22,7 +22,7 @@ status	ready(
 
 	prptr = &proctab[pid];
 	prptr->prstate = PR_READY;
-	mlfqinsert(pid, prptr->prprio);
+	enqueue(pid, mlfprocqueue[prptr->prprio]);
 	resched();
 
 	return OK;

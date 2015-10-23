@@ -12,7 +12,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 {
 	struct procent *ptold;	/* Ptr to table entry for old process	*/
 	struct procent *ptnew;	/* Ptr to table entry for new process	*/
-
+	struct ts_disptb *tbl;
 	/* If rescheduling is deferred, record attempt and return */
 
 	if (Defer.ndefers > 0) {
@@ -26,12 +26,14 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	// If state is SLEEP it is IO, if is CURR then it is CPU
 	if (ptold->prstate == PR_SLEEP){
-		ptold->prprio = tsdtab[ptold->prprio].ts_slpret;
+		tbl = &tstab[ptold->prprio];
+		ptold->prprio = tbl->ts_slpret;
 	}
 	else if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		
 		if(currpid != NULLPROC){
-			ptold->prprio = tsdtab[ptold->prprio].ts_tqexp;
+			tbl = &tstab[ptold->prprio];
+			ptold->prprio = tbl.ts_tqexp;
 		}
 
 		// if (ptold->prprio > firstkey(readylist)) {
@@ -42,7 +44,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 		ptold->prstate = PR_READY;
 		kprintf("inserting old cpu proc\n");
-		mlfqinsert(currpid, ptold->prprio);
+		enqueue(currpid, mlfprocqueue[ptold->prprio]);
 	}
 
 	/* Force context switch to highest priority ready process */
@@ -52,12 +54,14 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	//Check if NULL process and make sure there are no other processes to run
 	if(currpid == NULLPROC && !mlfqisempty()){
 		kprintf("reinsert null proc\n");
-		mlfqinsert(currpid, ptnew->prprio);
+		enqueue(currpid, mlfprocqueue[ptnew->prprio]);
 		currpid = mlfqdequeue();
 		ptnew = &proctab[currpid];
 	}
+	tbl = &tstab[ptnew->prprio];
+
 	ptnew->prstate = PR_CURR;
-	preempt = tsdtab[ptnew->prprio].ts_quantum;		/* Reset time slice for process	*/
+	preempt = tbl->ts_quantum;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */
