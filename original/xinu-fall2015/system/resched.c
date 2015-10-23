@@ -70,6 +70,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	level = &tsdtab[ptnew->prprio];
 	ptnew->prstate = PR_CURR;
 	preempt = level->ts_quantum;		/* Reset time slice for process	*/
+	kprintf("New preempt: %d\n", preempt);
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */
