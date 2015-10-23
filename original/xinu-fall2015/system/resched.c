@@ -48,24 +48,12 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		}
 
 		ptold->prstate = PR_READY;
-		enqueue(currpid, mlfprocqueue[ptold->prprio]);
+		mlfqinsert(currpid, ptold->prprio);
+
 	}
 
 	/* Force context switch to highest priority ready process */
-	int i = DISPTBSIZE -1;
-	while(i >= 0){
-		if(!isempty(mlfprocqueue[i])){
-			currpid = dequeue(mlfprocqueue[i]);
-			if (currpid == NULLPROC){
-				if(!isempty(mlfprocqueue[i])){
-					enqueue(currpid, mlfprocqueue[i]);
-					currpid = dequeue(mlfprocqueue[i]);	
-				}
-			}
-			break;
-		}
-		i--;
-	}
+	currpid = mlfqdequeue();
 	ptnew = &proctab[currpid];
 	level = &tsdtab[ptnew->prprio];
 	ptnew->prstate = PR_CURR;
