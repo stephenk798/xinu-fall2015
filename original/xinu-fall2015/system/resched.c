@@ -71,7 +71,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptnew->prstate = PR_CURR;
 	preempt = level->ts_quantum;		/* Reset time slice for process	*/
 	if(currpid != NULLPROC){
-		kprintf("\nproc: %s New preempt: %d\n", ptnew->prname, preempt);
+		kprintf("\nproc: %s new prio: %d New preempt: %d\n", ptnew->prname, ptnew->prprio, preempt);
 	}
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
