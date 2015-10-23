@@ -99,7 +99,7 @@ void	nulluser()
 	resume (
 	   create((void *)main, INITSTK, INITPRIO, "Main process", 0,
            NULL));
-
+	kprintf("main created\n");
 	/* Become the Null process (i.e., guarantee that the CPU has	*/
 	/*  something to run when no other process is ready to execute)	*/
 
