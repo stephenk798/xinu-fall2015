@@ -24,6 +24,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	ptold = &proctab[currpid];
 
+<<<<<<< HEAD
 	// If state is SLEEP it is IO, if is CURR then it is CPU
 	if (ptold->prstate == PR_SLEEP){
 		tbl = &tsdtab[ptold->prprio];
@@ -34,15 +35,17 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		if(currpid != NULLPROC){
 			tbl = &tsdtab[ptold->prprio];
 			ptold->prprio = tbl->ts_tqexp;
+=======
+	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
+		if (ptold->prprio > firstkey(readylist)) {
+			return;
+>>>>>>> parent of d911d6a... lab3 part3 setup
 		}
-
-		// if (ptold->prprio > firstkey(readylist)) {
-		// 	return;
-		// }
 
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
+<<<<<<< HEAD
 		enqueue(currpid, mlfprocqueue[ptold->prprio]);
 	}
 
@@ -77,6 +80,17 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	ptnew->prstate = PR_CURR;
 	preempt = tbl->ts_quantum;		/* Reset time slice for process	*/
+=======
+		insert(currpid, readylist, ptold->prprio);
+	}
+
+	/* Force context switch to highest priority ready process */
+
+	currpid = dequeue(readylist);
+	ptnew = &proctab[currpid];
+	ptnew->prstate = PR_CURR;
+	preempt = QUANTUM;		/* Reset time slice for process	*/
+>>>>>>> parent of d911d6a... lab3 part3 setup
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */

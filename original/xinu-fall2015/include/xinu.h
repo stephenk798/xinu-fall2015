@@ -42,5 +42,3 @@
 #include <string.h>
 #include <messages.h>
 #include <lab1.h>
-#include <ts_disptb.h>
-#include <multilevelfq.h>
