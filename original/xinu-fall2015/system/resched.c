@@ -26,13 +26,13 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	// If state is SLEEP it is IO, if is CURR then it is CPU
 	if (ptold->prstate == PR_SLEEP){
-		tbl = &tstab[ptold->prprio];
+		tbl = &tsdtab[ptold->prprio];
 		ptold->prprio = tbl->ts_slpret;
 	}
 	else if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		
 		if(currpid != NULLPROC){
-			tbl = &tstab[ptold->prprio];
+			tbl = &tsdtab[ptold->prprio];
 			ptold->prprio = tbl->ts_tqexp;
 		}
 
@@ -58,7 +58,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		currpid = mlfqdequeue();
 		ptnew = &proctab[currpid];
 	}
-	tbl = &tstab[ptnew->prprio];
+	tbl = &tsdtab[ptnew->prprio];
 
 	ptnew->prstate = PR_CURR;
 	preempt = tbl->ts_quantum;		/* Reset time slice for process	*/
