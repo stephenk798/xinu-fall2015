@@ -12,7 +12,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 {
 	struct procent *ptold;	/* Ptr to table entry for old process	*/
 	struct procent *ptnew;	/* Ptr to table entry for new process	*/
-	struct ts_disptb *tbl;
+
 	/* If rescheduling is deferred, record attempt and return */
 
 	if (Defer.ndefers > 0) {
@@ -27,13 +27,11 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		if (ptold->prprio > firstkey(readylist)) {
 			return;
-
 		}
 
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
-
 		insert(currpid, readylist, ptold->prprio);
 	}
 
