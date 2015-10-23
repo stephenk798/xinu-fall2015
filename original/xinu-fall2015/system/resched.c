@@ -24,23 +24,51 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 
 	ptold = &proctab[currpid];
 
-	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
-		if (ptold->prprio > firstkey(readylist)) {
-			return;
+	// if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
+	// 	if (ptold->prprio > firstkey(readylist)) {
+	// 		return;
+	// 	}
+
+	// 	/* Old process will no longer remain current */
+
+	// 	ptold->prstate = PR_READY;
+	// 	insert(currpid, readylist, ptold->prprio);
+	// }
+
+	struct ts_disptb *level = &tsdtab[ptold->prprio];
+	if(ptold->prstate == PR_SLEEP){
+		//if process is asleep it is IO
+		ptold->prprio = level->ts_slpret;
+	}
+	else if(ptold->prstate == PR_CURR){
+		//if it is current it is CPU
+		if(currpid != NULLPROC){
+			ptold->prpio = level->ts_tqexp;
 		}
 
-		/* Old process will no longer remain current */
-
 		ptold->prstate = PR_READY;
-		insert(currpid, readylist, ptold->prprio);
+		enqueue(currpid, mlfprocqueue[ptold->prprio]);
 	}
 
 	/* Force context switch to highest priority ready process */
-
-	currpid = dequeue(readylist);
+	int i = DISPTBSIZE -1;
+	while(i >= 0){
+		if(!isempty(mlfprocqueue[i])){
+			currpid = dequeue(mlfprocqueue[i]);
+			if (currpid == NULLPROC){
+				if(!isempty(mlfprocqueue[i])){
+					enqueue(currpid, mlfprocqueue[i]);
+					currpid = dequeue(mlfprocqueue[i]);				}
+				}
+			}
+			break;
+		}
+		i--;
+	}
 	ptnew = &proctab[currpid];
+	level = &tstab[ptnew->prprio];
 	ptnew->prstate = PR_CURR;
-	preempt = QUANTUM;		/* Reset time slice for process	*/
+	preempt = level->ts_quantum;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */
