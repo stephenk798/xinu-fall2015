@@ -58,7 +58,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 			if (currpid == NULLPROC){
 				if(!isempty(mlfprocqueue[i])){
 					enqueue(currpid, mlfprocqueue[i]);
-					currpid = dequeue(mlfprocqueue[i]);				}
+					currpid = dequeue(mlfprocqueue[i]);	
 				}
 			}
 			break;
