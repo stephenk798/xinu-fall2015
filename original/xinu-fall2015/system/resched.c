@@ -66,7 +66,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		i--;
 	}
 	ptnew = &proctab[currpid];
-	level = &tstab[ptnew->prprio];
+	level = &tsdtab[ptnew->prprio];
 	ptnew->prstate = PR_CURR;
 	preempt = level->ts_quantum;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
