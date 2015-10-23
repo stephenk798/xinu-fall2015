@@ -26,7 +26,7 @@ struct	memblk	memlist;	/* List of free memory blocks		*/
 int	prcount;		/* Total number of live processes	*/
 pid32	currpid;		/* ID of currently executing process	*/
 struct ts_disptb tsdtab[DISPTBSIZE];
-
+qid16 mlfprocqueue[DISPTBSIZE];
 
 void initTSTable(){
 	int i;
@@ -242,7 +242,7 @@ static	void	sysinit()
 	for(i = 0; i < DISPTBSIZE; i++){
 		mlfprocqueue[i] = newqueue();
 	}
-	
+
 	/* Initialize the real time clock */
 
 	clkinit();
