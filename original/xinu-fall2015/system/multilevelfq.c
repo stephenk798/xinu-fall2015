@@ -17,6 +17,7 @@ pid32 mlfqdequeue(){
 					currpid = dequeue(mlfprocqueue[i]);	
 				}
 			}
+			break;
 		}
 		i--;
 	}
