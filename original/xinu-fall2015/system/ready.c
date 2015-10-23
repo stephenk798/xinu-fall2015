@@ -3,7 +3,7 @@
 #include <xinu.h>
 
 qid16	readylist;			/* Index of ready list		*/
-
+qid16 mlfprocqueue[DISPTBSIZE];
 /*------------------------------------------------------------------------
  *  ready  -  Make a process eligible for CPU service
  *------------------------------------------------------------------------

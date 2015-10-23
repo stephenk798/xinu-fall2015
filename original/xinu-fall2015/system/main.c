@@ -3,11 +3,6 @@
 #include <xinu.h>
 #include <stdio.h>
 
-void bob(){
-	kprintf("bob\n");
-	stackdepth();
-}
-
 process	main(void)
 {
 	/*Moved hello world message to intialize.c on 9/1/15*/
@@ -26,10 +21,10 @@ process	main(void)
 	// kprintf("\n");
 	// sleepms(300);
 
-	pid32 procA = create(printnoloop, 1024, 24, "printnoloop", 1, 'A');
-	pid32 procB = create(printnoloop, 1024, 23, "printnoloop", 1, 'B');
-	pid32 procC = create(printnoloop, 1024, 22, "printnoloop", 1, 'C');
-	pid32 procD = create(printnoloop, 1024, 21, "printnoloop", 1, 'D');
+	pid32 procA = create(printloop, 1024, 24, "printloop", 1, 'A');
+	pid32 procB = create(printloop, 1024, 23, "printloop", 1, 'B');
+	pid32 procC = create(printloop, 1024, 22, "printloop", 1, 'C');
+	pid32 procD = create(printloop, 1024, 21, "printloop", 1, 'D');
 
 	kprintf("P");
 	resume(procA);

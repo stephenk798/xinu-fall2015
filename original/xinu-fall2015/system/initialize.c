@@ -25,6 +25,62 @@ struct	memblk	memlist;	/* List of free memory blocks		*/
 
 int	prcount;		/* Total number of live processes	*/
 pid32	currpid;		/* ID of currently executing process	*/
+struct ts_disptb tsdtab[DISPTBSIZE];
+
+
+void initTSTable(){
+	int i;
+	struct ts_disptb *level;
+	for(i = 0 ; i < DISPTBSIZE; i++){
+		level = &tsdtab[i];
+
+		level[i].ts_tqexp = i-10;
+		if(i < 10){
+			level[i].ts_tqexp = 0;
+			level[i].ts_slpret = 50;
+			level[i].ts_quantum = 200;
+		}
+		else if(i < 20){
+			level[i].ts_slpret = 51;
+			level[i].ts_quantum = 160;
+		}
+		else if(i < 30){
+			level[i].ts_slpret = 52;
+			level[i].ts_quantum = 120;
+		}
+		else if(i < 35){
+			level[i].ts_slpret = 53;
+			level[i].ts_quantum = 80;
+		}
+		else if(i < 40){
+			level[i].ts_slpret = 54;
+			level[i].ts_quantum = 80;
+		}
+		else if(i < 50){
+			if(i < 45){
+				level[i].ts_slpret = 55;
+			}
+			else if (i == 45){
+				level[i].ts_slpret = 56;
+			}
+			else if (i == 46){
+				level[i].ts_slpret = 57;
+			}
+			else{
+				level[i].ts_slpret = 58;
+			}				
+			level[i].ts_quantum = 40;
+		}
+		else if (i < 59){
+			level[i].ts_slpret = 58;
+			level[i].ts_quantum = 40;
+		}
+		else if (i == 59){
+			level[i].ts_slpret = 59;
+			level[i].ts_quantum = 20;
+		}
+	}
+}
 
 /*------------------------------------------------------------------------
  * nulluser - initialize the system and become the null process
@@ -177,10 +233,16 @@ static	void	sysinit()
 
 	bufinit();
 
+	/* initialize timeshare table*/
+	initTSTable();
+
 	/* Create a ready list for processes */
 
 	readylist = newqueue();
-
+	for(i = 0; i < DISPTBSIZE; i++){
+		mlfprocqueue[i] = newqueue();
+	}
+	
 	/* Initialize the real time clock */
 
 	clkinit();
