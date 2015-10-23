@@ -51,13 +51,13 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	kprintf("Inserted proc: %s\n", ptold->prname);
 	int mlfqlevel = DISPTBSIZE-1;
 	while(mlfqlevel>=0){
-		if(!(isempty(mlfqueue[mlfqlevel]))){	
-			currpid = dequeue(mlfqueue[mlfqlevel]);
+		if(!(isempty(mlfprocqueue[mlfqlevel]))){	
+			currpid = dequeue(mlfprocqueue[mlfqlevel]);
 			if(currpid==NULLPROC){			//if highest priority process is only NULL process then
 				//check there is no other process in the ready list
-				if(!(isempty(mlfqueue[mlfqlevel]))){
-					enqueue(currpid, mlfqueue[mlfqlevel]);	//put the process in the ready list as current and enqueue null in the end
-					currpid = dequeue(mlfqueue[mlfqlevel]);
+				if(!(isempty(mlfprocqueue[mlfqlevel]))){
+					enqueue(currpid, mlfprocqueue[mlfqlevel]);	//put the process in the ready list as current and enqueue null in the end
+					currpid = dequeue(mlfprocqueue[mlfqlevel]);
 				}
 			}
 			break;
