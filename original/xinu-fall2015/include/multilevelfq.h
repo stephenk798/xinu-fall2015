@@ -1,1 +1,1 @@
-qid16 mlfprocqueue[];
+extern qid16 mlfprocqueue[];
