@@ -5,7 +5,6 @@
 
 process	main(void)
 {
-
 	kprintf("\nHello World!\n");
 	kprintf("\nI'm the first XINU app and running function main() in system/main.c.\n");
 	kprintf("\nI was created by nulluser() in system/initialize.c using create().\n");
