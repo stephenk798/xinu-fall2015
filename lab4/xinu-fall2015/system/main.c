@@ -8,7 +8,6 @@ int myvictimglobal = 0;
 process	main(void)
 {
 
-	sleepms(200);
 	/*-------*/
 	kprintf("\n...creating a shell\n");
 	recvclr();

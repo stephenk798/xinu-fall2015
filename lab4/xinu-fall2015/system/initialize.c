@@ -94,7 +94,7 @@ void	nulluser()
 	kprintf("\nYou can do something else, or do nothing; it's completely up to you.\n");
 	*/
 	
-
+	kprintf("creating main now\n");
 	/* Create a process to execute function main() */
 	resume (
 	   create((void *)main, INITSTK, INITPRIO, "Main process", 0,
@@ -106,7 +106,6 @@ void	nulluser()
 	while (TRUE) {
 		;		/* Do nothing */
 	}
-
 }
 
 /*------------------------------------------------------------------------
@@ -162,7 +161,7 @@ static	void	sysinit()
 	prptr->prstkbase = getstk(NULLSTK);
 	prptr->prstklen = NULLSTK;
 	prptr->prstkptr = 0;
-	prptr->prcpuused = 100000;
+	prptr->prcpuused = 0;
 	currpid = NULLPROC;
 	
 	/* Initialize semaphores */
