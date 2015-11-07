@@ -3,10 +3,11 @@
 #include <xinu.h>
 #include <stdio.h>
 
-int myvictimglobal = 0;
-
 process	main(void)
 {
+
+	kprintf("DO Stuff\n");
+	sleepms(200);
 
 	/*-------*/
 	kprintf("\n...creating a shell\n");
