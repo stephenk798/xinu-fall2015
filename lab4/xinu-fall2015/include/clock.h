@@ -10,8 +10,6 @@
 #define CLKTICKS_PER_SEC  1000	/* clock timer resolution		*/
 
 extern	uint32	clktime;	/* current time in secs since boot	*/
-extern 	uint32	clktimefine; /* current time in millisecs since boot */
-extern 	uint32 	clktimeswitch; /*time current process was switched in */
 
 extern	qid16	sleepq;		/* queue for sleeping processes		*/
 extern	uint32	preempt;	/* preemption counter			*/
