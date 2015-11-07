@@ -23,6 +23,8 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	/* Point to process table entry for the current (old) process */
 
 	ptold = &proctab[currpid];
+	ptold->prcpuused += (clktimefine - clktimeswitch);
+	clktimeswitch = clktimefine;/*reset time switched in */	
 
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		if (ptold->prprio > firstkey(readylist)) {
