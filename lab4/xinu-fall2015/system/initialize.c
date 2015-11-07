@@ -143,7 +143,6 @@ static	void	sysinit()
 		prptr->prname[0] = NULLCH;
 		prptr->prstkbase = NULL;
 		prptr->prprio = 0;
-		prptr->prcpuused = 0;
 	}
 
 	/* Initialize the Null process entry */	
@@ -155,7 +154,6 @@ static	void	sysinit()
 	prptr->prstkbase = getstk(NULLSTK);
 	prptr->prstklen = NULLSTK;
 	prptr->prstkptr = 0;
-	prptr->prcpuused = 0;
 	currpid = NULLPROC;
 	
 	/* Initialize semaphores */
