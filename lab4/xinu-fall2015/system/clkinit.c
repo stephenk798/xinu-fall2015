@@ -29,6 +29,7 @@ void	clkinit(void)
 
 	clktime = 0;
 	clktimefine = 0;
+	clktimeswitch = 0;
 	/* Set interrupt vector for the clock to invoke clkdisp */
 
 	set_evec(IRQBASE, (uint32)clkdisp);
