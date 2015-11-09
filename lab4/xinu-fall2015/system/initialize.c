@@ -181,9 +181,9 @@ static	void	sysinit()
 		init(i);
 	}
 
-	
+
 	/*create sending list for processes */
-	sendlist = newqueue();
+	//sendlist = newqueue();
 	
 	return;
 }
