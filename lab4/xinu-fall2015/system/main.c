@@ -30,8 +30,8 @@ process	main(void)
 	pid32 rec = create(recA, 1024, 20, "rec", 0, NULL);
 	pid32 sndA = create(sendbtA, 1024, 20, "sendA", 1, rec);
 	
-	resume(rec1);
-	resume(snd1);
+	resume(rec);
+	resume(sndA);
 
 	sleepms(200);
 	kprintf("\n...creating a shell\n");
