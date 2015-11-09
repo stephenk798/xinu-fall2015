@@ -183,7 +183,7 @@ static	void	sysinit()
 
 
 	/*create sending list for processes */
-	//sendlist = newqueue();
+	sendlist = newqueue();
 	
 	return;
 }
