@@ -5,7 +5,7 @@
 /* Default # of queue entries: 1 per process plus 2 for ready list plus	*/
 /*			2 for sleep list plus 2 per semaphore plus 2 for sending list		*/
 #ifndef NQENT
-#define NQENT	(NPROC + 8 + NSEM + NSEM)
+#define NQENT	(NPROC + 4 + NSEM + NSEM + 2)
 
 #define	EMPTY	(-1)		/* Null value for qnext or qprev index	*/
 #define	MAXKEY	0x7FFFFFFF	/* Max key that can be stored in queue	*/

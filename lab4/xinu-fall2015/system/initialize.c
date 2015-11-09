@@ -168,10 +168,10 @@ static	void	sysinit()
 	/* Initialize buffer pools */
 
 	bufinit();
-
+	kprintf("gonna make sendlist now\n");
 	/*create sending list for processes */
 	sendlist = newqueue();
-
+	kprintf("we made it boys\n");
 	/* Create a ready list for processes */
 
 	readylist = newqueue();
