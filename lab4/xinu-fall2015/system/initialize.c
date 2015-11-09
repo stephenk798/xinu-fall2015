@@ -173,6 +173,9 @@ static	void	sysinit()
 
 	readylist = newqueue();
 
+	/*create sending list for processes */
+	sendlist = newqueue();
+	
 	/* Initialize the real time clock */
 
 	clkinit();
