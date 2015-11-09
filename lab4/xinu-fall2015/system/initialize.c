@@ -25,7 +25,7 @@ struct	memblk	memlist;	/* List of free memory blocks		*/
 
 int	prcount;		/* Total number of live processes	*/
 pid32	currpid;		/* ID of currently executing process	*/
-
+qid16 sendlist;
 /*------------------------------------------------------------------------
  * nulluser - initialize the system and become the null process
  *
@@ -168,6 +168,9 @@ static	void	sysinit()
 	/* Initialize buffer pools */
 
 	bufinit();
+
+	/*create sending list for processes */
+	sendlist = newqueue();
 
 	/* Create a ready list for processes */
 

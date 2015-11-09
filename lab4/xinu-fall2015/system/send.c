@@ -2,8 +2,6 @@
 
 #include <xinu.h>
 
-qid16 sendlist;
-
 /*------------------------------------------------------------------------
  *  send  -  Pass a message to a process and start recipient if waiting
  *------------------------------------------------------------------------
