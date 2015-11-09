@@ -169,10 +169,6 @@ static	void	sysinit()
 
 	bufinit();
 
-	/*create sending list for processes */
-	sendlist = newqueue();
-
-
 	/* Create a ready list for processes */
 
 	readylist = newqueue();
