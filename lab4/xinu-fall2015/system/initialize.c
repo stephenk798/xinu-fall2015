@@ -177,13 +177,12 @@ static	void	sysinit()
 
 	clkinit();
 
+		/*create sending list for processes */
+	sendlist = newqueue();
+
 	for (i = 0; i < NDEVS; i++) {
 		init(i);
 	}
-
-
-	/*create sending list for processes */
-	sendlist = newqueue();
 	
 	return;
 }
