@@ -169,6 +169,10 @@ static	void	sysinit()
 
 	bufinit();
 
+	/*create sending list for processes */
+	sendlist = newqueue();
+
+
 	/* Create a ready list for processes */
 
 	readylist = newqueue();
@@ -176,9 +180,6 @@ static	void	sysinit()
 	/* Initialize the real time clock */
 
 	clkinit();
-
-		/*create sending list for processes */
-	sendlist = newqueue();
 
 	for (i = 0; i < NDEVS; i++) {
 		init(i);
