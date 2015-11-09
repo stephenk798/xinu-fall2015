@@ -27,12 +27,13 @@ void recA(){
 process	main(void)
 {
 
-	pid32 rec1, snd1;
-	rec1 = create(recA, 1024, 20, "rec1", 0);
-	snd1 = create(sendbtA, 1024, 20, "snd1", 1, rec1);
+	pid32 rec = create(recA, 1024, 20, "rec", 0, NULL);
+	pid32 sndA = create(sendbtA, 1024, 20, "sendA", 1, rec);
+	
 	resume(rec1);
 	resume(snd1);
 
+	sleepms(200);
 	kprintf("\n...creating a shell\n");
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
