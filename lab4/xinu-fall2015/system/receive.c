@@ -25,8 +25,8 @@ umsg32	receive(void)
 	struct procent *sendptr;
 	//while there are itesm in send list, go through them until
 	//a sending process with a valid msg is found, then break	
-	while(!isempty(sendlist)){
-		sendid = dequeue(sendlist);
+	while(!isempty_sendq(currpid)){
+		sendid = dequeue_sendq(currpid);
 		sendptr = &proctab[sendid];
 		if(sendptr->sndflag == 1){
 			break;

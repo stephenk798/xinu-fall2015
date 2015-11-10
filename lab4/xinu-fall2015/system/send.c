@@ -83,9 +83,8 @@ syscall	sendbt(
 		{
 		    insertd(currpid, sleepq, maxwait);
 		}
-		//insert it into send list, priority doesn't matter cuz FIFO
-		insert(currpid, sendlist, 0);
-
+		//insert it into sendq, pid is receiver, currpid is sender
+		insert_sendq(pid, currpid);
 		resched();
 	}
 	//If does not have a message act like send

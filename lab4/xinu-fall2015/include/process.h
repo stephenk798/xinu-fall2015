@@ -18,6 +18,8 @@
 #define	PR_RECTIM	7	/* Process is receiving with timeout	*/
 #define PR_SEND 8 	/* Process is sending Message 	*/
 
+#define SENDQSIZE NPROC /*max index of the sending queue */
+
 /* Miscellaneous process definitions */
 
 #define	PNMLEN		16	/* Length of process "name"		*/
@@ -56,6 +58,9 @@ struct procent {		/* Entry in the process table		*/
 	uint32 prcpuused;
 	umsg32 sndmsg;
 	bool8 sndflag;
+	pid32 sendqueue[SENDQSIZE]; /* If receiving process, uses this as queue for sending processes */
+	int sendhead;
+	int sendtail;
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

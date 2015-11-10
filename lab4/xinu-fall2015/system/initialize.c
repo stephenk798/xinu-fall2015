@@ -25,7 +25,7 @@ struct	memblk	memlist;	/* List of free memory blocks		*/
 
 int	prcount;		/* Total number of live processes	*/
 pid32	currpid;		/* ID of currently executing process	*/
-qid16 sendlist;
+
 /*------------------------------------------------------------------------
  * nulluser - initialize the system and become the null process
  *
@@ -143,6 +143,8 @@ static	void	sysinit()
 		prptr->prname[0] = NULLCH;
 		prptr->prstkbase = NULL;
 		prptr->prprio = 0;
+		prptr->sendhead = -1;
+		prptr->sendtail = -1;
 	}
 
 	/* Initialize the Null process entry */	
@@ -168,10 +170,7 @@ static	void	sysinit()
 	/* Initialize buffer pools */
 
 	bufinit();
-	kprintf("gonna make sendlist now\n");
-	/*create sending list for processes */
-	sendlist = newqueue();
-	kprintf("we made it boys\n");
+
 	/* Create a ready list for processes */
 
 	readylist = newqueue();
