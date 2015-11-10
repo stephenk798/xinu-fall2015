@@ -11,7 +11,7 @@ void sendA(pid32 pid, umsg32 msg){
 void sendbt1(pid32 pid, char msg, int delay){
 	kprintf("Time: %d\n", clktimefine);
 	sendbt(pid, msg, delay);
-	kprintf("time returned: %d\n", clktimefine)
+	kprintf("time returned: %d\n", clktimefine);
 }
 
 void sendbtA(pid32 pid){
