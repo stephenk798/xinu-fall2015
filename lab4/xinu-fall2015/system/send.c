@@ -105,7 +105,7 @@ syscall	sendbt(
 		//if it does have a message, well then return an error.
 		kprintf("Message: %c not delivered. Receiver had a message and hadn't received yet\n", msg);
 		restore(mask);
-		return SYSERR;	
+		return TIMEOUT;	
 	}
 
 	restore(mask);		/* Restore interrupts */
