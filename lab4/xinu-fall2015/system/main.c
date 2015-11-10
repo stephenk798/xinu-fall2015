@@ -9,9 +9,9 @@ void sendA(pid32 pid, umsg32 msg){
 }
 
 void sendbt1(pid32 pid, char msg, int delay){
-	kprintf("Time: %d\n", clktimefine);
+	kprintf("Time: %d pid: %d\n", clktimefine, pid);
 	sendbt(pid, msg, delay);
-	kprintf("time returned: %d\n", clktimefine);
+	kprintf("time returned: %d pid: %d\n", clktimefine, pid);
 }
 
 void sendbtA(pid32 pid){
