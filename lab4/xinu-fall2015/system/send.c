@@ -103,7 +103,7 @@ syscall	sendbt(
 	}
 	else{
 		//if it does have a message, well then return an error.
-		kprintf("It had a message and hadn't received yet\n");
+		kprintf("Message: %c not delivered. Receiver had a message and hadn't received yet\n", msg);
 		restore(mask);
 		return SYSERR;	
 	}
