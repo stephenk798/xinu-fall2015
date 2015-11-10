@@ -27,7 +27,6 @@ void sendbtA(pid32 pid){
 void recA(){
 	int i = 0;
 	umsg32 msgrec;
-	sleepms(100);
 	for(i =0; i<4; i++){
 		msgrec = receive();
 		kprintf("msgreceived: %c at %d\n", msgrec, clktimefine);
