@@ -69,9 +69,6 @@ syscall	sendbt(
 	struct procent *sendpr;
 	sendpr = &proctab[currpid];
 	    
-
-	kprintf("pid %d, message sent: %c", pid, msg);
-
 	//Check if it has message
 	if (prptr->prhasmsg){
 		//set sndmsg to the message passed, change process state, set sndflag to 1
