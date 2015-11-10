@@ -9,7 +9,7 @@ void sendA(pid32 pid, umsg32 msg){
 }
 
 void sendbt1(pid32 pid, char msg, int delay){
-	kprintf("Time: %d pid: %d\n", clktimefine, currpid);
+	kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
 	sendbt(pid, msg, delay);
 	kprintf("time returned: %d pid: %d\n", clktimefine, currpid);
 }
@@ -42,11 +42,11 @@ process	main(void)
 	pid32 sndC = create(sendbt1, 1024, 20, "sndC", 3, rec, 'c', 10);
 	pid32 sndD = create(sendbt1, 1024, 20, "sndD", 3, rec, 'd', 10);
 	
-	resume(rec);
 	resume(sndA);
 	resume(sndB);
 	resume(sndC);
 	resume(sndD);
+	resume(rec);
 	
 
 
