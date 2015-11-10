@@ -27,6 +27,7 @@ void sendbtA(pid32 pid){
 void recA(){
 	int i = 0;
 	umsg32 msgrec;
+	sleepms(5);
 	for(i =0; i<4; i++){
 		msgrec = receive();
 		kprintf("msgreceived: %c at %d\n", msgrec, clktimefine);
@@ -36,10 +37,10 @@ process	main(void)
 {
 
 	pid32 rec = create(recA, 1024, 30, "rec", 0, NULL);
-	pid32 sndA = create(sendbt1, 1024, 20, "sndA", 3, rec, 'a', 10);
+	pid32 sndA = create(sendbt1, 1024, 20, "sndA", 3, rec, 'a', 20);
 	pid32 sndB = create(sendbt1, 1024, 20, "sndB", 3, rec, 'b', 4);
-	pid32 sndC = create(sendbt1, 1024, 20, "sndC", 3, rec, 'c', 10);
-	pid32 sndD = create(sendbt1, 1024, 20, "sndD", 3, rec, 'd', 10);
+	pid32 sndC = create(sendbt1, 1024, 20, "sndC", 3, rec, 'c', 25);
+	pid32 sndD = create(sendbt1, 1024, 20, "sndD", 3, rec, 'd', 30);
 	
 	resume(sndA);
 	resume(sndB);
@@ -49,7 +50,7 @@ process	main(void)
 	
 
 
-	sleepms(200);
+	sleepms(500);
 	kprintf("\n...creating a shell\n");
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
