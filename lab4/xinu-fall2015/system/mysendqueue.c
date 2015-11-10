@@ -42,7 +42,7 @@ pid32 dequeue_sendq(pid32 receiver){
 
 	//if the head and tail are the same, meaning only one element, reset it to an empty queue
 	if(prptr->sendhead ==prptr->sendtail){
-		prptr-sendhead = -1;
+		prptr->sendhead = -1;
 		prptr->sendtail = -1;
 	}
 	else if(prptr->sendhead == SENDQSIZE-1){
