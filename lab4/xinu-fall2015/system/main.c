@@ -39,9 +39,8 @@ void recA(){
 }
 
 int myrecvhandler(void) {
-	extern umsg32 msgglob;
 	msgglob = receive();
-	kprintf("myrecvhandler ran in pid: %d\n", currpid);
+	kprintf("myrecvhandler ran in pid: %d, received: %c\n", currpid, msgglob);
 	return(OK);
 }
 
