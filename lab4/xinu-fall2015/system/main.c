@@ -51,6 +51,7 @@ int regCB(){
       kprintf("recv handler registration failed\n");
       return 1;
    }
+   kprintf("returning from regCB time: %d\n", clktimefine);
    return OK;
 }
 
