@@ -62,7 +62,7 @@ process	main(void)
 {
 	msgglob = '0';
 	kprintf("msgglob: %c\n", msgglob);
-	pid32 rec = create(regCB, 1024, 30, "regCB", 0, NULL);
+	pid32 rec = create(regCB, 1024, 20, "regCB", 0, NULL);
 	pid32 sndA = create(sendA, 1024, 20, "sndA", 2, rec, 'a');
 
 	resume(sndA);
