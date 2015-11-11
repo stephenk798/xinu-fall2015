@@ -13,6 +13,7 @@ void sendbt1(pid32 pid, char msg, int delay){
 	kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
 	sendbt(pid, msg, delay);
 	kprintf("time returned: %d pid: %d\n", clktimefine, currpid);
+	kprintf("msgglob is :%c\n", msgglob);
 }
 
 void sendbtA(pid32 pid){
@@ -38,7 +39,7 @@ void recA(){
 int myrecvhandler(void) {
 	extern umsg32 msgglob;
 	msgglob = receive();
-	kprintf("msgglob received: %c, pid: %d\n", msgglob, currpid);
+	kprintf("myrecvhandler ran in pid: %d\n", currpid);
 	return(OK);
 }
 
@@ -69,7 +70,9 @@ process	main(void)
 	// resume(sndC);
 	// resume(sndD);
 	// resume(rec);
-	
+	while(1){
+		
+	}
 
 
 	sleepms(500);

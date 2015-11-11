@@ -48,7 +48,8 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	/*	Call the callback function	*/
 	struct procent *ptcb; /* Ptr to table entry for new process to call cb */
 	ptcb = &proctab[currpid];
-	if (ptcb->hasmsg == 1 && ptcb->cbfunc != NULL){
+	//Only call back if there is a message
+	if (ptcb->prhasmsg == 1 && ptcb->cbfunc != NULL){
 		(*ptcb->cbfunc)();
 	}
 
