@@ -51,10 +51,7 @@ int regCB(){
 		return 1;
 	}
 	while(TRUE){
-		if(msgglob != '0'){
-			kprintf("msgglob changed! is: %c\n", msgglob);
-			msgglob = '0';
-		}
+		kprintf("msgglob changed! is: %c\n", msgglob);
 	}
 	kprintf("returning from regCB time: %d\n", clktimefine);
 	return OK;
