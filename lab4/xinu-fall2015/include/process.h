@@ -55,12 +55,13 @@ struct procent {		/* Entry in the process table		*/
 	umsg32	prmsg;		/* Message sent to this process		*/
 	bool8	prhasmsg;	/* Nonzero iff msg is valid		*/
 	int16	prdesc[NDESC];	/* Device descriptors for process	*/
-	uint32 prcpuused;
-	umsg32 sndmsg;
-	bool8 sndflag;
-	pid32 sendqueue[SENDQSIZE]; /* If receiving process, uses this as queue for sending processes */
-	int sendhead;
-	int sendtail;
+	uint32 prcpuused;	/*	total cpu time used by process	*/
+	umsg32 sndmsg;		/*	1 word message process is sending when it has been blocked	*/
+	bool8 sndflag;		/*	flag used to tell if it has a valid sndmsg	*/
+	pid32 sendqueue[SENDQSIZE]; /* If receiving process, uses this as a circular array queue for sending processes */
+	int sendhead;		/*	head of the sendqueue	*/
+	int sendtail;		/*	tail of the sendqueue	*/
+	int (* cbfunc) (void); 	/*	callback function if registercb is used	*/
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

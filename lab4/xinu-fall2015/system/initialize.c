@@ -145,6 +145,7 @@ static	void	sysinit()
 		prptr->prprio = 0;
 		prptr->sendhead = -1;
 		prptr->sendtail = -1;
+		prptr->cbfunc = NULL;
 	}
 
 	/* Initialize the Null process entry */	
