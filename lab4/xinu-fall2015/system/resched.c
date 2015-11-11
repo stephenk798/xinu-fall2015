@@ -47,7 +47,6 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	/*	Call the callback function	*/
 	struct procent *ptcb; /* Ptr to table entry for new process to call cb */
 	ptcb = &proctab[currpid];
-	kprintf("\nptcb name: %s, hasmsg:%d, msg: %c, func Null: %d\n", ptcb->prname, ptcb->prhasmsg, ptcb->prmsg, (ptcb->cbfunc == NULL));
 	//Only call back if there is a message
 	if (ptcb->prhasmsg == TRUE && ptcb->cbfunc != NULL){
 		kprintf("calling cb func\n");
