@@ -6,7 +6,9 @@
 umsg32 msgglob;
 
 void sendA(pid32 pid, umsg32 msg){
+	kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
 	send(pid, msg);
+	kprintf("time returned: %d pid: %d\n", clktimefine, currpid);
 }
 
 void sendbt1(pid32 pid, char msg, int delay){
@@ -44,7 +46,7 @@ int myrecvhandler(void) {
 }
 
 int regCB(){
-	kprintf("in regCB\n");
+	kprintf("in regCB at %d\n", clktimefine);
 	if (registercb(&myrecvhandler) != OK) {
       kprintf("recv handler registration failed\n");
       return 1;
@@ -65,7 +67,7 @@ process	main(void)
 	// pid32 sndB = create(sendbt1, 1024, 20, "sndB", 3, rec, 'b', 4);
 	// pid32 sndC = create(sendbt1, 1024, 20, "sndC", 3, rec, 'c', 25);
 	// pid32 sndD = create(sendbt1, 1024, 20, "sndD", 3, rec, 'd', 30);
-	
+	kprintf("msgglob is :%c\n", msgglob);
 	// resume(sndA);
 	// resume(sndB);
 	// resume(sndC);
