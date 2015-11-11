@@ -48,14 +48,17 @@ int myrecvhandler(void) {
 int regCB(){
 	kprintf("in regCB at %d\n", clktimefine);
 	if (registercb(&myrecvhandler) != OK) {
-      kprintf("recv handler registration failed\n");
-      return 1;
-   }
-   while(TRUE){
-
-   }
-   kprintf("returning from regCB time: %d\n", clktimefine);
-   return OK;
+		kprintf("recv handler registration failed\n");
+		return 1;
+	}
+	while(TRUE){
+		if(msgglob != '0'){
+			kprintf("msgglob changed! is: %c\n", msgglob);
+			msgglob = '0';
+		}
+	}
+	kprintf("returning from regCB time: %d\n", clktimefine);
+	return OK;
 }
 
 process	main(void)
