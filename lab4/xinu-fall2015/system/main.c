@@ -44,6 +44,7 @@ int myrecvhandler(void) {
 }
 
 int regCB(){
+	kprintf("in regCB\n");
 	if (registercb(&myrecvhandler) != OK) {
       kprintf("recv handler registration failed\n");
       return 1;
@@ -71,7 +72,7 @@ process	main(void)
 	// resume(sndD);
 	// resume(rec);
 	while(1){
-		
+
 	}
 
 
