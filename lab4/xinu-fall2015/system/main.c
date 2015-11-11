@@ -51,6 +51,9 @@ int regCB(){
       kprintf("recv handler registration failed\n");
       return 1;
    }
+   while(TRUE){
+
+   }
    kprintf("returning from regCB time: %d\n", clktimefine);
    return OK;
 }
@@ -75,7 +78,7 @@ process	main(void)
 	// resume(sndC);
 	// resume(sndD);
 	// resume(rec);
-	while(1){
+	while(TRUE){
 
 	}
 
