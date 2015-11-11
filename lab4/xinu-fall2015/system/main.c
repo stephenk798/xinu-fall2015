@@ -51,6 +51,7 @@ int regCB(){
       kprintf("recv handler registration failed\n");
       return 1;
    }
+   return OK;
 }
 
 process	main(void)
