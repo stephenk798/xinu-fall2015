@@ -143,6 +143,9 @@ static	void	sysinit()
 		prptr->prname[0] = NULLCH;
 		prptr->prstkbase = NULL;
 		prptr->prprio = 0;
+		prptr->sendhead = -1;
+		prptr->sendtail = -1;
+		prptr->cbfunc = NULL;
 	}
 
 	/* Initialize the Null process entry */	
@@ -180,6 +183,7 @@ static	void	sysinit()
 	for (i = 0; i < NDEVS; i++) {
 		init(i);
 	}
+	
 	return;
 }
 

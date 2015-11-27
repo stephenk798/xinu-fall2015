@@ -44,6 +44,13 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptnew->prstate = PR_CURR;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
+	/*	Call the callback function	*/
+	struct procent *ptcb; /* Ptr to table entry for new process to call cb */
+	ptcb = &proctab[currpid];
+	//Only call back if there is a message
+	if (ptcb->prhasmsg == TRUE && ptcb->cbfunc != NULL){
+		(*ptcb->cbfunc)();
+	}
 
 	/* Old process returns here when resumed */
 

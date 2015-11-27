@@ -41,3 +41,5 @@
 #include <stdio.h>
 #include <string.h>
 #include <messages.h>
+#include <lab4.h>
+#include <mysendqueue.h>
