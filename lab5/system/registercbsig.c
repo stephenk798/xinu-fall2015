@@ -15,6 +15,7 @@ syscall registercbsig(uint16 asig, int ( *func)(void), uint32 optarg){
 	prptr = &proctab[currpid];
 	
 	if(asig == MYSIGRECV){
+		kprintf("Successfully set cbfunc for asig\n");
 		prptr->cbfunc = func; //set the cbfunc of the current process to the callback function
 	}
 	else if (asig == MYSIGALRM){
