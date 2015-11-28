@@ -5,6 +5,8 @@ syscall registercbsig(uint16 asig, int ( *func)(void), uint32 optarg){
 	struct	procent *prptr;		/* Ptr to process' table entry	*/
 
 	mask = disable();
+
+	kprintf("Made it into registercb sig, asig: %d\n", asig);
 	/*	if the cb func is NULL return an error	*/
 	if(func == NULL){
 		restore(mask);
