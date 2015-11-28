@@ -62,6 +62,11 @@ struct procent {		/* Entry in the process table		*/
 	int sendhead;		/*	head of the sendqueue	*/
 	int sendtail;		/*	tail of the sendqueue	*/
 	int (* cbfunc) (void); 	/*	callback function if registercb is used	*/
+	int alarmtime; /* alarm time for MYSIGALRM */
+	int (* alarmfunc) (void); /* alarm callback function for MYSIGALRM */
+	int xcputime;	/* Time left of cpu time for process to use before xcpufunc is called */	
+	int (* xcpufunc) (void);
+
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

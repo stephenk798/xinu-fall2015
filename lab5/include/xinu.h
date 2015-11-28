@@ -43,3 +43,4 @@
 #include <messages.h>
 #include <lab4.h>
 #include <mysendqueue.h>
+#include <mysignal.h>
