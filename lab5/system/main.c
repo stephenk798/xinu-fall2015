@@ -5,38 +5,16 @@
 
 umsg32 msgglob;
 
-void sendA(pid32 pid, umsg32 msg){
-	kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
-	send(pid, msg);
-	kprintf("time returned: %d pid: %d\n", clktimefine, currpid);
-}
-
-void sendbt1(pid32 pid, char msg, int delay){
-	kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
-	sendbt(pid, msg, delay);
-	kprintf("time returned: %d pid: %d\n", clktimefine, currpid);
-	kprintf("msgglob is :%c\n", msgglob);
-}
-
-void sendbtA(pid32 pid){
-		kprintf("Time: %d\n", clktimefine);
-		sendbt(pid, 'a', 10);
-		kprintf("Time: %d\n", clktimefine);
-		sendbt(pid, 'b', 3);
-		kprintf("Time: %d\n", clktimefine);
-		sendbt(pid, 'c', 15);
-
-}
-
-void recA(){
-	int i = 0;
-	umsg32 msgrec;
-	sleepms(5);
-	for(i =0; i<4; i++){
-		msgrec = receive();
-		kprintf("msgreceived: %c at %d\n", msgrec, clktimefine);
+void sendA(pid32 pid){
+	umsg32 msg = 'a';
+	while(msg != 'd'){
+		kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
+		send(pid, msg);
+		kprintf("time returned: %d pid: %d\n", clktimefine, currpid);
+		msg++;
 	}
 }
+
 
 int myrecvhandler(void) {
 	msgglob = receive();
@@ -57,12 +35,34 @@ int regCB(){
 	return OK;
 }
 
+int myalrmhandler(void) {
+	msgglob = receive();
+	kprintf("myalrmhandler ran in pid: %d, received: %c\n", currpid, msgglob);
+	return(OK);
+}
+int myxcpuhandler(void) {
+	msgglob = receive();
+	kprintf("myxcpuhandler ran in pid: %d, received: %c\n", currpid, msgglob);
+	return(OK);
+}
+
+int regcbsig(){
+	int a;
+    registercbsig(MYSIGRECV, &myrecvhandler, NULL);
+    registercbsig(MYSIGALRM, &myalrmhandler, 500);
+    registercbsig(MYSIGXCPU, &myxcpuhandler, 300); 
+    while(TRUE){
+      a+=1; //to represent this process is doing some stuff.
+    }
+    return OK;
+}
+
 process	main(void)
 {
 	msgglob = '0';
 	kprintf("msgglob: %c\n", msgglob);
-	pid32 rec = create(regCB, 1024, 20, "regCB", 0, NULL);
-	pid32 sndA = create(sendA, 1024, 20, "sndA", 2, rec, 'a');
+	pid32 rec = create(regcbsig, 1024, 20, "regcbsig", 0, NULL);
+	pid32 sndA = create(sendA, 1024, 20, "sndA", 1, rec);
 
 	resume(sndA);
 	resume(rec);
