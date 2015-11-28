@@ -38,7 +38,7 @@ void	clkhandler()
 
 	/* Decrement the preemption counter, and reschedule when the */
 	/*   remaining time reaches zero			     */
-	struct procent prproc;
+	struct procent *prproc;
 	prproc = proctab[currpid];
 
 	if(prproc->xcpufunc != NULL &&prproc->xcputime > 0){
