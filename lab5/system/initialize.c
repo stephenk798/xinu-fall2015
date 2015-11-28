@@ -146,6 +146,10 @@ static	void	sysinit()
 		prptr->sendhead = -1;
 		prptr->sendtail = -1;
 		prptr->cbfunc = NULL;
+		prptr->alarmtime = 0;
+		prptr->alarmfunc = NULL;
+		prptr->xcputime = 0;
+		prptr->xcpufunc = NULL;
 	}
 
 	/* Initialize the Null process entry */	

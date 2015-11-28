@@ -49,8 +49,9 @@ int myxcpuhandler(void) {
 int regcbsig(){
 	int a;
     registercbsig(MYSIGRECV, &myrecvhandler, NULL);
-    registercbsig(MYSIGALRM, &myalrmhandler, 500);
-    registercbsig(MYSIGXCPU, &myxcpuhandler, 300); 
+    kprintf("received a message, msglob is %c\n", msgglob);
+    // registercbsig(MYSIGALRM, &myalrmhandler, 500);
+    // registercbsig(MYSIGXCPU, &myxcpuhandler, 300); 
     while(TRUE){
       a+=1; //to represent this process is doing some stuff.
     }
