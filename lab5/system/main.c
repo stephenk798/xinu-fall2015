@@ -31,15 +31,15 @@ int regCB(){
 }
 
 int myalrmhandler(void) {
-	msgglob = receive();
+	msgglob++;
 	kprintf("\n\nclktimefine end: %d\n", clktimefine);
-	kprintf("myalrmhandler ran in pid: %d, received: %c\n\n", currpid, msgglob);
+	kprintf("myalrmhandler ran in pid: %d, changed msgglob to: %c\n\n", currpid, msgglob);
 	return(OK);
 }
 int myxcpuhandler(void) {
-	msgglob = receive();
+	msgglob++;
 	kprintf("\n\ncpuused end: %d\n", proctab[currpid].prcpuused);
-	kprintf("myxcpuhandler ran in pid: %d, received: %c\n", currpid, msgglob);
+	kprintf("myxcpuhandler ran in pid: %d, changed msgglob to: %c\n\n", currpid, msgglob);
 	return(OK);
 }
 
@@ -65,11 +65,7 @@ process	main(void)
 	kprintf("msgglob: %c\n", msgglob);
 	pid32 rec = create(regcbsig, 1024, 20, "regcbsig", 0, NULL);
 	pid32 sndA = create(sendA, 1024, 20, "sndA", 2, rec, 'A');
-	pid32 sndB = create(sendA, 1024, 20, "sndB", 2, rec, 'B');
-	pid32 sndC = create(sendA, 1024, 20, "sndC", 2, rec, 'C');
 	resume(sndA);
-	resume(sndB);
-	resume(sndC);
 	resume(rec);
 	// pid32 rec = create(recA, 1024, 20, "rec", 0, NULL);
 	// pid32 sndA = create(sendbt1, 1024, 20, "sndA", 3, rec, 'a', 20);
