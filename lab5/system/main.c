@@ -8,9 +8,9 @@ umsg32 msgglob;
 void sendA(pid32 pid){
 	umsg32 msg = 'a';
 	while(msg != 'd'){
+		kprintf("msg is now %c\n", msg);
 		kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
 		send(pid, msg);
-		kprintf("time returned: %d pid: %d\n", clktimefine, currpid);
 		msg++;
 	}
 }
@@ -54,7 +54,7 @@ int regcbsig(){
 	registercbsig(MYSIGALRM, &myalrmhandler, 500);
     registercbsig(MYSIGXCPU, &myxcpuhandler, 300); 
     kprintf("clktimefine start: %d\n", clktimefine);
-   	kprintf("\n\ncpuused start: %d\n", proctab[currpid].prcpuused);
+   	kprintf("cpuused start: %d\n", proctab[currpid].prcpuused);
     while(TRUE){
       a+=1; //to represent this process is doing some stuff.
     }
