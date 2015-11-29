@@ -50,7 +50,7 @@ int myxcpuhandler(void) {
 int regcbsig(){
 	int a;
     //registercbsig(MYSIGRECV, &myrecvhandler, NULL);
-    kprintf("clktimefine start: %d\n", clktimefine)
+    kprintf("clktimefine start: %d\n", clktimefine);
     registercbsig(MYSIGALRM, &myalrmhandler, 500);
     // registercbsig(MYSIGXCPU, &myxcpuhandler, 300); 
     kprintf("received a message, msglob is %c\n", msgglob);
