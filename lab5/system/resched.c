@@ -49,7 +49,6 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptcb = &proctab[currpid];
 	//Only call back if there is a message
 	if (ptcb->prhasmsg == TRUE && ptcb->cbfunc != NULL){
-		kprintf("We had a message received and a cb\n");
 		(*ptcb->cbfunc)();
 	}
 
