@@ -32,6 +32,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		}
 		if(ptold->alarmfunc != NULL && ptold->alarmtime > 0 && ptold->alarmtime <= clktimefine){
 			(*ptold->alarmfunc)();
+			ptold->alarmtime = 0;
 		}
 		/* Old process will no longer remain current */
 
