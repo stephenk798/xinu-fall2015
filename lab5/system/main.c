@@ -5,14 +5,9 @@
 
 umsg32 msgglob;
 
-void sendA(pid32 pid){
-	umsg32 msg = 'a';
-	while(msg != 'd'){
-		kprintf("msg is now %c\n", msg);
-		kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
-		sendbt(pid, msg, 0);
-		msg++;
-	}
+void sendA(pid32 pid, umsg32 msg){
+	kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
+	sendbt(pid, msg, 0);
 }
 
 
@@ -57,6 +52,9 @@ int regcbsig(){
    	kprintf("cpuused start: %d\n", proctab[currpid].prcpuused);
     while(TRUE){
       a+=1; //to represent this process is doing some stuff.
+      if(a %100){
+      	kprintf("clktimefine: %d, cpuused: %d, a is :%d\n",clktimefine,proctab[currpid].prcpuused, a);
+      }
     }
     return OK;
 }
@@ -66,9 +64,12 @@ process	main(void)
 	msgglob = '0';
 	kprintf("msgglob: %c\n", msgglob);
 	pid32 rec = create(regcbsig, 1024, 20, "regcbsig", 0, NULL);
-	pid32 sndA = create(sendA, 1024, 20, "sndA", 1, rec);
-
+	pid32 sndA = create(sendA, 1024, 20, "sndA", 2, rec, 'A');
+	pid32 sndB = create(sendA, 1024, 20, "sndB", 2, rec, 'B');
+	pid32 sndC = create(sendA, 1024, 20, "sndC", 2, rec, 'C');
 	resume(sndA);
+	resume(sndB);
+	resume(sndC);
 	resume(rec);
 	// pid32 rec = create(recA, 1024, 20, "rec", 0, NULL);
 	// pid32 sndA = create(sendbt1, 1024, 20, "sndA", 3, rec, 'a', 20);
