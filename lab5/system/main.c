@@ -52,7 +52,7 @@ int regcbsig(){
    	kprintf("cpuused start: %d\n", proctab[currpid].prcpuused);
     while(TRUE){
       a+=1; //to represent this process is doing some stuff.
-      if(a %100){
+      if((a % 100) == 0){
       	kprintf("clktimefine: %d, cpuused: %d, a is :%d\n",clktimefine,proctab[currpid].prcpuused, a);
       }
     }
