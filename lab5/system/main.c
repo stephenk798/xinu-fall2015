@@ -10,7 +10,7 @@ void sendA(pid32 pid){
 	while(msg != 'd'){
 		kprintf("msg is now %c\n", msg);
 		kprintf("Time: %d pid: %d, msg: %c\n", clktimefine, currpid, msg);
-		send(pid, msg);
+		sendbt(pid, msg, 1000);
 		msg++;
 	}
 }
