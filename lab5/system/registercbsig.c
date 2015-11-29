@@ -28,7 +28,7 @@ syscall registercbsig(uint16 asig, int ( *func)(void), uint32 optarg){
 			prptr->alarmtime = optarg + clktimefine; //Set wait time with optarg, then add curr time to make checking later easier
 		}
 		else if (asig == MYSIGXCPU){
-			prptr->xcputime = optarg - (prptr->prcpuused) - (clktimefine - clktimeswitch);
+			prptr->xcputime = (optarg - (prptr->prcpuused)); //Gets time remaining
 			prptr->xcpufunc = func;
 		}
 	}

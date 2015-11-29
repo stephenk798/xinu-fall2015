@@ -43,6 +43,7 @@ int myalrmhandler(void) {
 }
 int myxcpuhandler(void) {
 	msgglob = receive();
+	kprintf("\n\ncpuused end: %d\n", proctab[currpid].prcpuused);
 	kprintf("myxcpuhandler ran in pid: %d, received: %c\n", currpid, msgglob);
 	return(OK);
 }
@@ -50,9 +51,10 @@ int myxcpuhandler(void) {
 int regcbsig(){
 	int a;
     //registercbsig(MYSIGRECV, &myrecvhandler, NULL);
-    kprintf("clktimefine start: %d\n", clktimefine);
-    registercbsig(MYSIGALRM, &myalrmhandler, 500);
-    // registercbsig(MYSIGXCPU, &myxcpuhandler, 300); 
+	//kprintf("clktimefine start: %d\n", clktimefine);
+   	kprintf("\n\ncpuused start: %d\n", proctab[currpid].prcpuused);
+    //registercbsig(MYSIGALRM, &myalrmhandler, 500);
+    registercbsig(MYSIGXCPU, &myxcpuhandler, 300); 
     kprintf("received a message, msglob is %c\n", msgglob);
     while(TRUE){
       a+=1; //to represent this process is doing some stuff.
