@@ -30,7 +30,9 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 		if (ptold->prprio > firstkey(readylist)) {
 			return;
 		}
-
+		if(ptold->alarmfunc != NULL && ptold->alarmtime > 0 && ptold->alarmtime <= clktimefine){
+			(*ptold->alarmfunc)();
+		}
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;

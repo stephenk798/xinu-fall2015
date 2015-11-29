@@ -15,15 +15,22 @@ syscall registercbsig(uint16 asig, int ( *func)(void), uint32 optarg){
 	prptr = &proctab[currpid];
 	
 	if(asig == MYSIGRECV){
-		kprintf("Successfully set cbfunc for asig\n");
 		prptr->cbfunc = func; //set the cbfunc of the current process to the callback function
 	}
-	else if (asig == MYSIGALRM){
-		prptr->alarmfunc = func; //Set alarm func 
-		prptr->alarmtime = optarg + clktimefine; //Set wait time with optarg, then add curr time to make checking later easier
-	}
-	else if (asig == MYSIGXCPU){
-		prptr->xcputime = optarg - (prptr->prcpuused) - (clktimefine - clktimeswitch);
+	else {
+		if(optarg < 0){
+			kprintf("Time argument less than 0, not allowed\n");
+			return SYSERR;
+		}
+		
+		if (asig == MYSIGALRM){
+			prptr->alarmfunc = func; //Set alarm func 
+			prptr->alarmtime = optarg + clktimefine; //Set wait time with optarg, then add curr time to make checking later easier
+		}
+		else if (asig == MYSIGXCPU){
+			prptr->xcputime = optarg - (prptr->prcpuused) - (clktimefine - clktimeswitch);
+			prptr->xcpufunc = func;
+		}
 	}
 	restore(mask);
 	return OK;
