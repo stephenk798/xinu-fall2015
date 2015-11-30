@@ -13,8 +13,8 @@ syscall	kill(
 	intmask	mask;			/* Saved interrupt mask		*/
 	struct	procent *prptr;		/* Ptr to process' table entry	*/
 	int32	i;			/* Index into descriptors	*/
-	// struct memblk *prevgbg;
-	// struct memblk *nextgbg;
+	struct memblk *prevgbg;
+	struct memblk *nextgbg;
 
 	mask = disable();
 	if (isbadpid(pid) || (pid == NULLPROC)
