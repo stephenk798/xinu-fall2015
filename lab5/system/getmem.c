@@ -24,6 +24,7 @@ char  	*getmem(
 
 	prev = &memlist;
 	curr = memlist.mnext;
+	kprintf("curr gbgpid: %d, currpid is: %d\n", curr->gbgpid, currpid);
 	while (curr != NULL) {			/* Search free list	*/
 
 		if (curr->mlength == nbytes) {	/* Block is exact match	*/
