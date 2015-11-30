@@ -24,7 +24,7 @@ syscall	kill(
 	}
 
 	kprintf("Killing process %s\n", prptr->prname);
-
+	kprintf("memlist mlength b4 free: %u\n", memlist.mlength);
 	prevgbg = &gbglist;//Start the walking
 	nextgbg = gbglist.gbgnext;
 	while(nextgbg != NULL){
@@ -45,7 +45,7 @@ syscall	kill(
 		nextgbg = prevgbg->gbgnext; //Continue walking
 
 	}
-
+	kprintf("finsihed %s gbg list. memlist mlength now: %u\n", prptr->prname, memlist.mlength);
 	if (--prcount <= 1) {		/* Last user process completes	*/
 		xdone();
 	}
