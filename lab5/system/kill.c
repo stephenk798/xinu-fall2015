@@ -43,7 +43,7 @@ syscall	kill(
 		}
 		//prevgbg->gbgnext is updated when freemem is called, otherwise it is updated in the else above
 		nextgbg = prevgbg->gbgnext; //Continue walking
-
+		kprintf("still in gbg walk\n");
 	}
 	kprintf("finsihed %s gbg list. memlist mlength now: %u\n", prptr->prname, memlist.mlength);
 	if (--prcount <= 1) {		/* Last user process completes	*/
