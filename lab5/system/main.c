@@ -60,7 +60,7 @@ int regcbsig(){
 void sendmem(pid32 pid){
 	kprintf("memlist mlength in bsnd: %u\n", memlist.mlength);
 	char* memtest = getmem(30);
-	char* memtest2 = getmem(70);
+	//char* memtest2 = getmem(70);
 	sendbt(pid, 'A',0);
 	kprintf("msgglob: %c\n", msgglob);
 	freemem(memtest, 30);
