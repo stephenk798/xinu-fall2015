@@ -82,7 +82,7 @@ void receivemem(){
 process	main(void)
 {
 	kprintf("memlist in bmain is: %u\n", memlist.mlength);
-
+	kprintf("gbglist in bmain is: %u\n", gbglist.mlength);
 	msgglob = '0';
 	kprintf("msgglob: %c\n", msgglob);
 	
