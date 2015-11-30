@@ -76,6 +76,7 @@ void	meminit(void) {
 	memptr->mnext = (struct memblk *)NULL;
 	memptr->mlength = 0;
 	
+	gbgptr = &gbglist;
 	gbgptr->gbgnext = (struct memblk *) NULL;
 
 	/* Initialize the memory counters */
