@@ -64,6 +64,7 @@ syscall	freemem(
 	if(nextgbg != NULL){ 
 		kprintf("nextgbg not null, so remove it!\n");
 		prevgbg->gbgnext = nextgbg->gbgnext;//remove entry from gbglist
+		nextgbg = NULL;
 		gbglist.mlength -= nbytes;
 		if(prevgbg->gbgnext == NULL)
 			kprintf("prevgbg gbg next is null!\n");
