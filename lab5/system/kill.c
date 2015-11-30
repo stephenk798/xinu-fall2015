@@ -48,6 +48,7 @@ syscall	kill(
 	}
 	kprintf("before teh send thing m8\n");
 	send(prptr->prparent, pid);
+	kprintf("Send whatever was needed\n");
 	for (i=0; i<3; i++) {
 		close(prptr->prdesc[i]);
 	}
