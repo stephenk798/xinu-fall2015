@@ -78,6 +78,7 @@ void	meminit(void) {
 	
 	gbgptr = &gbglist;
 	gbgptr->gbgnext = NULL;
+	gbgptr->gbgpid = -3;
 
 	/* Initialize the memory counters */
 	/*    Heap starts at the end of Xinu image */
