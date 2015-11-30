@@ -14,6 +14,7 @@ void sendA(pid32 pid, umsg32 msg){
 int myrecvhandler(void) {
 	msgglob = receive();
 	kprintf("myrecvhandler ran in pid: %d, received: %c\n", currpid, msgglob);
+	msgglob++;
 	return(OK);
 }
 
@@ -57,10 +58,11 @@ int regcbsig(){
 }
 
 void sendmem(pid32 pid){
+	kprintf("memlist mlength in bsnd: %d\n", memlist.mlength);
 	char* memtest = getmem(30);
 	char* memtest2 = getmem(70);
-	kprintf("memtest: %d, %s\r\n", memtest, memtest);
-	kprintf("memtest2: %d, %s\r\n", memtest2, memtest2);
+	kprintf("memtest: %d\n", memtest);
+	kprintf("memtest2: %d\n", memtest2);
 	sendbt(pid, 'A',0);
 	kprintf("msgglob: %c\n", msgglob);
 	freemem(memtest, 30);
@@ -71,10 +73,11 @@ void sendmem(pid32 pid){
 void receivemem(){
 	kprintf("memlist in brec is: %d\n", memlist.mlength);
 	char*memtest3 = getmem(40);
-	msgglob = receive();
+	if (registercb(&myrecvhandler) != OK) {
+		kprintf("recv handler registration failed\n");
+		return 1;
+	}
 	kprintf("memlist in erec is: %d\n", memlist.mlength);
-	msgglob++;
-
 }
 process	main(void)
 {
