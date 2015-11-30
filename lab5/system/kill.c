@@ -23,31 +23,31 @@ syscall	kill(
 		return SYSERR;
 	}
 
-	// kprintf("Killing process %s, pid: %d\n", prptr->prname, pid);
-	// kprintf("memlist mlength b4 free: %u\n", memlist.mlength);
-	// prevgbg = &gbglist;//Start the walking
-	// nextgbg = gbglist.gbgnext;
-	// while(nextgbg != NULL && nextgbg->gbgpid > 0 && gbglist.mlength > 0){
-	// 	//check the pid that owns curr mem, if they match then free it
-	// 	if(nextgbg->gbgpid == pid){
-	// 		kprintf("nextgbg mlength: %u\n",nextgbg->mlength);
-	// 		if(freemem((char *)nextgbg, nextgbg->mlength) != OK){ //Make sure it frees the memory aokay
-	// 			kprintf("mem did not free aokay...\n");
-	// 			restore(mask);
-	// 			return SYSERR;
-	// 		}
-	// 		nextgbg = prevgbg->gbgnext; //Continue walking
+	kprintf("Killing process %s, pid: %d\n", prptr->prname, pid);
+	kprintf("memlist mlength b4 free: %u\n", memlist.mlength);
+	prevgbg = &gbglist;//Start the walking
+	nextgbg = gbglist.gbgnext;
+	while(nextgbg != NULL && nextgbg->gbgpid > 0 && gbglist.mlength > 0){
+		//check the pid that owns curr mem, if they match then free it
+		if(nextgbg->gbgpid == pid){
+			kprintf("nextgbg mlength: %u\n",nextgbg->mlength);
+			if(freemem((char *)nextgbg, nextgbg->mlength) != OK){ //Make sure it frees the memory aokay
+				kprintf("mem did not free aokay...\n");
+				restore(mask);
+				return SYSERR;
+			}
+			nextgbg = prevgbg->gbgnext; //Continue walking
 		
-	// 	}
-	// 	else{
-	// 		//if they don't match, set prev to next, set next to next 
-	// 		prevgbg = nextgbg;
-	// 		nextgbg = nextgbg->gbgnext;
-	// 	}
-	// 	//prevgbg->gbgnext is updated when freemem is called, otherwise it is updated in the else above
-	// 	kprintf("still in gbg walk, nextgbg pid: %d, gbg mlength: %u\n", nextgbg->gbgpid, gbglist.mlength); //Stuck in this loop for some reason
-	// }
-	// kprintf("finsihed %s gbg list. memlist mlength now: %u\n", prptr->prname, memlist.mlength);
+		}
+		else{
+			//if they don't match, set prev to next, set next to next 
+			prevgbg = nextgbg;
+			nextgbg = nextgbg->gbgnext;
+		}
+		//prevgbg->gbgnext is updated when freemem is called, otherwise it is updated in the else above
+		kprintf("still in gbg walk, nextgbg pid: %d, gbg mlength: %u\n", nextgbg->gbgpid, gbglist.mlength); //Stuck in this loop for some reason
+	}
+	kprintf("finsihed %s gbg list. memlist mlength now: %u\n", prptr->prname, memlist.mlength);
 	if (--prcount <= 1) {		/* Last user process completes	*/
 		xdone();
 	}
