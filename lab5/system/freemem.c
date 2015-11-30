@@ -52,6 +52,7 @@ syscall	freemem(
 	memlist.mlength += nbytes;
 
 	kprintf("Bout to get to gbglist freemem stuff\n");
+	kprintf("gbglist.mlength: %u\n", gbglist.mlength);
 	if(gbglist.mlength > 0){
 		/* Remove allocated mem from list */
 		prevgbg = &gbglist; //do the same as above walking along the freelist
