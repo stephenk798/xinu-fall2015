@@ -108,11 +108,7 @@ process	main(void)
 	// resume(sndD);
 	// resume(rec);
 	while(TRUE){
-		if(msgglob == 'B'){
-			kprintf("memlist in main is: %u\n", memlist.mlength);
-			msgglob++;
-		}
-
+		kprintf("memlist in main is: %u\n", memlist.mlength);
 	}
 
 
