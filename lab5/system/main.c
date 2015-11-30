@@ -65,6 +65,9 @@ void sendmem(pid32 pid){
 	kprintf("msgglob: %c\n", msgglob);
 	freemem(memtest, 30);
 	kprintf("memlist mlength in snd: %u\n", memlist.mlength);
+	while(msgglob != 'B'){
+
+	}
 	return;
 }
 
@@ -73,9 +76,10 @@ void receivemem(){
 	char*memtest3 = getmem(40);
 	if (registercb(&myrecvhandler) != OK) {
 		kprintf("recv handler registration failed\n");
-		return 1;
+		return;
 	}
 	kprintf("memlist in erec is: %u\n", memlist.mlength);
+	return;
 }
 process	main(void)
 {
