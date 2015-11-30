@@ -46,7 +46,7 @@ syscall	kill(
 	if (--prcount <= 1) {		/* Last user process completes	*/
 		xdone();
 	}
-
+	kprintf("before teh send thing m8\n");
 	send(prptr->prparent, pid);
 	for (i=0; i<3; i++) {
 		close(prptr->prdesc[i]);
