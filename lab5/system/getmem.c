@@ -24,7 +24,6 @@ char  	*getmem(
 
 	prev = &memlist;
 	curr = memlist.mnext;
-	kprintf("curr gbgpid: %d, currpid is: %d\n", curr->gbgpid, currpid);
 	while (curr != NULL) {			/* Search free list	*/
 
 		if (curr->mlength == nbytes) {	/* Block is exact match	*/
@@ -36,6 +35,8 @@ char  	*getmem(
 			curr->gbgpid = currpid; //Set the pid that owns the block
 			curr->gbgnext = gbgptr->gbgnext;//set the next gbg mem blk in list for current 
 			gbgptr->gbgnext = curr; //set the first gbg mem blk to current
+
+			
 			restore(mask);
 			return (char *)(curr);
 
@@ -49,7 +50,7 @@ char  	*getmem(
 			
 			gbgptr = &gbglist; //get the allocated list
 			gbglist.mlength += nbytes;
-			curr->mlength = nbytes; //set the length of the block to actual size
+			//curr->mlength = nbytes; //set the length of the block to actual size
 			curr->gbgpid = currpid; //Set the pid that owns the block
 			curr->gbgnext = gbgptr->gbgnext;//set the next gbg mem blk in list for current 
 			gbgptr->gbgnext = curr; //set the first gbg mem blk to current
