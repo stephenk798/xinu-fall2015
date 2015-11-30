@@ -86,8 +86,8 @@ process	main(void)
 	msgglob = '0';
 	kprintf("msgglob: %c\n", msgglob);
 	
-	pid32 recmem = create(receivemem,1024,20,"recmem", 0, NULL);
-	pid32 sndmem = create(sendmem,1024,20,"sndmem", 1, recmem);
+	pid32 recmem = create(receivemem,1024,21,"recmem", 0, NULL);
+	pid32 sndmem = create(sendmem,1024,21,"sndmem", 1, recmem);
 	
 	resume(recmem);
 	resume(sndmem);
@@ -108,7 +108,7 @@ process	main(void)
 	// resume(sndD);
 	// resume(rec);
 	while(TRUE){
-		kprintf("memlist in main is: %u\n", memlist.mlength);
+		
 	}
 
 
