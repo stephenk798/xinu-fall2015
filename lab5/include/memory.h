@@ -6,8 +6,8 @@
  * roundmb, truncmb - Round or truncate address to memory block size
  *----------------------------------------------------------------------
  */
-#define	roundmb(x)	(char *)( (7 + (uint32)(x)) & (~7) )
-#define	truncmb(x)	(char *)( ((uint32)(x)) & (~7) )
+#define	roundmb(x)	(char *)( (15 + (uint32)(x)) & (~15) )
+#define	truncmb(x)	(char *)( ((uint32)(x)) & (~15) )
 
 /*----------------------------------------------------------------------
  *  freestk  --  Free stack memory allocated by getstk
