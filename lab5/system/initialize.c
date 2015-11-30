@@ -20,7 +20,7 @@ extern	void meminit(void);	/* Initializes the free memory list	*/
 struct	procent	proctab[NPROC];	/* Process table			*/
 struct	sentry	semtab[NSEM];	/* Semaphore table			*/
 struct	memblk	memlist;	/* List of free memory blocks		*/
-
+struct  memblk	gbglist;	/*	List of allocated memory blocks		*/
 /* Active system status */
 
 int	prcount;		/* Total number of live processes	*/

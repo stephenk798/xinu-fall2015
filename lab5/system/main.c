@@ -56,26 +56,57 @@ int regcbsig(){
     return OK;
 }
 
+void sendmem(pid32 pid){
+	char* memtest = getmem(30);
+	char* memtest2 = getmem(70);
+	kprintf("memtest: %d, %s\r\n", memtest, memtest);
+	kprintf("memtest2: %d, %s\r\n", memtest2, memtest2);
+	send(pid, 'A');
+	freemem(memtest, 30);
+	kprintf("memlist mlength in snd: %d\n", memlist.mlength);
+	return;
+}
+
+void receivemem(){
+	kprintf("memlist in brec is: %d\n", memlist.mlength);
+	char*memtest3 = getmem(40);
+	msgglob = receive();
+	kprintf("memlist in erec is: %d\n", memlist.mlength);
+	msgglob++;
+
+}
 process	main(void)
 {
+	kprintf("memlist in bmain is: %d\n", memlist.mlength);
+
 	msgglob = '0';
 	kprintf("msgglob: %c\n", msgglob);
-	pid32 rec = create(regcbsig, 1024, 20, "regcbsig", 0, NULL);
-	pid32 sndA = create(sendA, 1024, 20, "sndA", 2, rec, 'A');
-	resume(sndA);
-	resume(rec);
+	
+	pid32 recmem = create(receivemem,1024,20,"recmem", 0, NULL);
+	pid32 sndmem = create(sendmem,1024,20,"sndmem", 1, recmem);
+	resume(sndmem);
+	resume(recmem);
+	//pid32 rec = create(regcbsig, 1024, 20, "regcbsig", 0, NULL);
+	//pid32 sndA = create(sendA, 1024, 20, "sndA", 2, rec, 'A');
+	// resume(sndA);
+	// resume(rec);
 	// pid32 rec = create(recA, 1024, 20, "rec", 0, NULL);
 	// pid32 sndA = create(sendbt1, 1024, 20, "sndA", 3, rec, 'a', 20);
 	// pid32 sndB = create(sendbt1, 1024, 20, "sndB", 3, rec, 'b', 4);
 	// pid32 sndC = create(sendbt1, 1024, 20, "sndC", 3, rec, 'c', 25);
 	// pid32 sndD = create(sendbt1, 1024, 20, "sndD", 3, rec, 'd', 30);
-	kprintf("msgglob is :%c\n", msgglob);
+	
+	//kprintf("msgglob is :%c\n", msgglob);
 	// resume(sndA);
 	// resume(sndB);
 	// resume(sndC);
 	// resume(sndD);
 	// resume(rec);
 	while(TRUE){
+		if(msgglob == 'B'){
+			kprintf("memlist in main is: %d\n", memlist.mlength);
+			msgglob++;
+		}
 
 	}
 

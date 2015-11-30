@@ -13,12 +13,33 @@ syscall	kill(
 	intmask	mask;			/* Saved interrupt mask		*/
 	struct	procent *prptr;		/* Ptr to process' table entry	*/
 	int32	i;			/* Index into descriptors	*/
+	struct memblk *prevgbg;
+	struct memblk *nextgbg;
 
 	mask = disable();
 	if (isbadpid(pid) || (pid == NULLPROC)
 	    || ((prptr = &proctab[pid])->prstate) == PR_FREE) {
 		restore(mask);
 		return SYSERR;
+	}
+
+	prevgbg = &gbglist;//Start the walking
+	nextgbg = gbglist.gbgnext;
+	while(nextgbg != NULL){
+		//check the pid that owns curr mem, if they match then free it
+		if(nextgbg->gbgpid == pid){
+			if(freemem((char *)nextgbg, nextgbg->mlength) != OK){ //Make sure it frees the memory aokay
+				restore(mask);
+				return SYSERR;
+			}
+		}
+		else{
+			//if they don't match, set prev to next, set next to next 
+			prevgbg = nextgbg;
+		}
+		//prevgbg->gbgnext is updated when freemem is called, otherwise it is updated in the else above
+		nextgbg = prevgbg->gbgnext; //Continue walking
+
 	}
 
 	if (--prcount <= 1) {		/* Last user process completes	*/

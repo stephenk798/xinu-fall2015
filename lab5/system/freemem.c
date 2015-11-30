@@ -14,6 +14,8 @@ syscall	freemem(
 	intmask	mask;			/* Saved interrupt mask		*/
 	struct	memblk	*next, *prev, *block;
 	uint32	top;
+	struct memblk *prevgbg;
+	struct memblk *nextgbg;
 
 	mask = disable();
 	if ((nbytes == 0) || ((uint32) blkaddr < (uint32) minheap)
@@ -48,6 +50,23 @@ syscall	freemem(
 
 	memlist.mlength += nbytes;
 
+	/* Remove allocated mem from list */
+	prevgbg = &gbglist; //do the same as above walking along the freelist
+	nextgbg = gbglist.gbgnext;
+	
+	//walk along until the block is found, or end of list is reached
+	while( nextgbg != NULL && nextgbg != block){
+		prevgbg = nextgbg; 
+		nextgbg = nextgbg->gbgnext;
+	}
+
+	//found the block! time to get rid of its stuff, or end of list so don't free anything
+	if(nextgbg != NULL){ 
+		prevgbg->gbgnext = nextgbg->gbgnext;//remove entry from gbglist
+		block->gbgnext = NULL; //set the next to null
+		block->gbgpid = 0; //Isn't owned by any process anymore, so set to 0
+	}
+	
 	/* Either coalesce with previous block or add to free list */
 
 	if (top == (uint32) block) { 	/* Coalesce with previous block	*/
