@@ -50,8 +50,10 @@ syscall	kill(
 	send(prptr->prparent, pid);
 	kprintf("Send whatever was needed\n");
 	for (i=0; i<3; i++) {
+		kprintf(" i is %d\n");
 		close(prptr->prdesc[i]);
 	}
+	kprintf("getting to freestk\n");
 	freestk(prptr->prstkbase, prptr->prstklen);
 
 	kprintf("made it up to the switch, prstate: %d\n", prptr->prstate);
