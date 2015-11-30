@@ -32,6 +32,7 @@ char  	*getmem(
 			memlist.mlength -= nbytes;
 
 			gbgptr = &gbglist; //get the allocated list
+			gbglist.mlength += nbytes;
 			curr->gbgpid = currpid; //Set the pid that owns the block
 			curr->gbgnext = gbgptr->gbgnext;//set the next gbg mem blk in list for current 
 			gbgptr->gbgnext = curr; //set the first gbg mem blk to current
@@ -47,6 +48,7 @@ char  	*getmem(
 			memlist.mlength -= nbytes;
 			
 			gbgptr = &gbglist; //get the allocated list
+			gbglist.mlength += nbytes;
 			curr->mlength = nbytes; //set the length of the block to actual size
 			curr->gbgpid = currpid; //Set the pid that owns the block
 			curr->gbgnext = gbgptr->gbgnext;//set the next gbg mem blk in list for current 
