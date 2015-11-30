@@ -59,11 +59,10 @@ int regcbsig(){
 
 void sendmem(pid32 pid){
 	kprintf("memlist mlength in bsnd: %u\n", memlist.mlength);
-	char* memtest = getmem(30);
-	char* memtest2 = getmem(70);
+	//char* memtest = getmem(30);
+	//char* memtest2 = getmem(70);
 	sendbt(pid, 'A',0);
-	kprintf("msgglob: %c\n", msgglob);
-	freemem(memtest, 30);
+	//freemem(memtest, 30);
 	while(msgglob != 'B'){
 
 	}
@@ -73,7 +72,7 @@ void sendmem(pid32 pid){
 
 void receivemem(){
 	kprintf("memlist in brec is: %u\n", memlist.mlength);
-	char*memtest3 = getmem(40);
+	//char*memtest3 = getmem(40);
 	msgglob = receive();
 	kprintf("msgglob is: %c\n", msgglob);
 	msgglob++;
