@@ -58,30 +58,28 @@ int regcbsig(){
 }
 
 void sendmem(pid32 pid){
-	kprintf("memlist mlength in bsnd: %d\n", memlist.mlength);
+	kprintf("memlist mlength in bsnd: %u\n", memlist.mlength);
 	char* memtest = getmem(30);
 	char* memtest2 = getmem(70);
-	kprintf("memtest: %d\n", memtest);
-	kprintf("memtest2: %d\n", memtest2);
 	sendbt(pid, 'A',0);
 	kprintf("msgglob: %c\n", msgglob);
 	freemem(memtest, 30);
-	kprintf("memlist mlength in snd: %d\n", memlist.mlength);
+	kprintf("memlist mlength in snd: %u\n", memlist.mlength);
 	return;
 }
 
 void receivemem(){
-	kprintf("memlist in brec is: %d\n", memlist.mlength);
+	kprintf("memlist in brec is: %u\n", memlist.mlength);
 	char*memtest3 = getmem(40);
 	if (registercb(&myrecvhandler) != OK) {
 		kprintf("recv handler registration failed\n");
 		return 1;
 	}
-	kprintf("memlist in erec is: %d\n", memlist.mlength);
+	kprintf("memlist in erec is: %u\n", memlist.mlength);
 }
 process	main(void)
 {
-	kprintf("memlist in bmain is: %d\n", memlist.mlength);
+	kprintf("memlist in bmain is: %u\n", memlist.mlength);
 
 	msgglob = '0';
 	kprintf("msgglob: %c\n", msgglob);
@@ -108,7 +106,7 @@ process	main(void)
 	// resume(rec);
 	while(TRUE){
 		if(msgglob == 'B'){
-			kprintf("memlist in main is: %d\n", memlist.mlength);
+			kprintf("memlist in main is: %u\n", memlist.mlength);
 			msgglob++;
 		}
 
