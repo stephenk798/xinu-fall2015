@@ -30,7 +30,7 @@ syscall	kill(
 	while(nextgbg != NULL){
 		//check the pid that owns curr mem, if they match then free it
 		if(nextgbg->gbgpid == pid){
-			//kprintf("nextgbg mlength: %u\n",nextgbg->mlength);
+			kprintf("nextgbg mlength: %u\n",nextgbg->mlength);
 			if(freemem((char *)nextgbg, nextgbg->mlength) != OK){ //Make sure it frees the memory aokay
 				kprintf("mem did not free aokay...\n");
 				restore(mask);
