@@ -13,8 +13,8 @@ syscall	kill(
 	intmask	mask;			/* Saved interrupt mask		*/
 	struct	procent *prptr;		/* Ptr to process' table entry	*/
 	int32	i;			/* Index into descriptors	*/
-	struct memblk *prevgbg;
-	struct memblk *nextgbg;
+	// struct memblk *prevgbg;
+	// struct memblk *nextgbg;
 
 	mask = disable();
 	if (isbadpid(pid) || (pid == NULLPROC)
@@ -57,7 +57,7 @@ syscall	kill(
 		close(prptr->prdesc[i]);
 	}
 	freestk(prptr->prstkbase, prptr->prstklen);
-
+	kprintf("made it up to the switch, prstate: %d\n", prptr->prstate);
 	switch (prptr->prstate) {
 	case PR_CURR:
 		prptr->prstate = PR_FREE;	/* Suicide */

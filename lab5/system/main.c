@@ -63,7 +63,7 @@ void sendmem(pid32 pid){
 	//char* memtest2 = getmem(70);
 	sendbt(pid, 'A',0);
 	//freemem(memtest, 30);
-	while(msgglob != 'B'){
+	while(msgglob < 'B'){
 
 	}
 	kprintf("memlist mlength in snd: %u\n", memlist.mlength);
@@ -74,8 +74,8 @@ void receivemem(){
 	kprintf("memlist in brec is: %u\n", memlist.mlength);
 	//char*memtest3 = getmem(40);
 	msgglob = receive();
-	kprintf("msgglob is: %c\n", msgglob);
 	msgglob++;
+	kprintf("msgglob is: %c\n", msgglob);
 	kprintf("memlist in erec is: %u\n", memlist.mlength);
 	return;
 }
