@@ -77,7 +77,7 @@ void	meminit(void) {
 	memptr->mlength = 0;
 	
 	gbgptr = &gbglist;
-	gbgptr->gbgnext = (struct memblk *) NULL;
+	gbgptr->gbgnext = NULL;
 
 	/* Initialize the memory counters */
 	/*    Heap starts at the end of Xinu image */

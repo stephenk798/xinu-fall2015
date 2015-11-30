@@ -45,7 +45,7 @@ syscall	kill(
 			nextgbg = nextgbg->gbgnext;
 		}
 		//prevgbg->gbgnext is updated when freemem is called, otherwise it is updated in the else above
-		kprintf("still in gbg walk\n"); //Stuck in this loop for some reason
+		kprintf("still in gbg walk, nextgbg pid: %d\n", nextgbg->gbgpid); //Stuck in this loop for some reason
 	}
 	kprintf("finsihed %s gbg list. memlist mlength now: %u\n", prptr->prname, memlist.mlength);
 	if (--prcount <= 1) {		/* Last user process completes	*/
