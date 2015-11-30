@@ -62,9 +62,10 @@ syscall	freemem(
 
 	//found the block! time to get rid of its stuff, or end of list so don't free anything
 	if(nextgbg != NULL){ 
+		kprintf("nextgbg not null, so remove it!\n");
 		prevgbg->gbgnext = nextgbg->gbgnext;//remove entry from gbglist
 		block->gbgnext = NULL; //set the next to null
-		block->gbgpid = 0; //Isn't owned by any process anymore, so set to 0
+		block->gbgpid = -1; //Isn't owned by any process anymore, so set to -1
 	}
 	
 	/* Either coalesce with previous block or add to free list */

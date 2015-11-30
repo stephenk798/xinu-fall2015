@@ -75,10 +75,12 @@ void	meminit(void) {
 	memptr = &memlist;
 	memptr->mnext = (struct memblk *)NULL;
 	memptr->mlength = 0;
-	
+	memptr->gbgpid = -1;
+	memptr->gbgnext = NULL;
+
 	gbgptr = &gbglist;
 	gbgptr->gbgnext = NULL;
-	gbgptr->gbgpid = -3;
+	gbgptr->gbgpid = -1;
 
 	/* Initialize the memory counters */
 	/*    Heap starts at the end of Xinu image */
@@ -144,6 +146,8 @@ void	meminit(void) {
 		memptr->mnext = next_memptr;
 		memptr = memptr->mnext;
 		memptr->mlength = next_block_length;
+		memptr->gbgpid = -1;
+		memptr->gbgnext = NULL;
 
 		/* Move to the next mmap block */
 		mmap_addr = (struct mbmregion*)((uint8*)mmap_addr + mmap_addr->size + 4);

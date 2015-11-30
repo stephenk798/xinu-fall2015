@@ -27,7 +27,7 @@ syscall	kill(
 	kprintf("memlist mlength b4 free: %u\n", memlist.mlength);
 	prevgbg = &gbglist;//Start the walking
 	nextgbg = gbglist.gbgnext;
-	while(nextgbg != NULL && nextgbg->gbgpid != -3){
+	while(nextgbg != NULL && nextgbg->gbgpid != -1){
 		//check the pid that owns curr mem, if they match then free it
 		if(nextgbg->gbgpid == pid){
 			kprintf("nextgbg mlength: %u\n",nextgbg->mlength);
