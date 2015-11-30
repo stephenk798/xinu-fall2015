@@ -78,6 +78,7 @@ void receivemem(){
 		kprintf("recv handler registration failed\n");
 		return;
 	}
+	kprintf("msgglob is: %c\n", msgglob);
 	kprintf("memlist in erec is: %u\n", memlist.mlength);
 	return;
 }
