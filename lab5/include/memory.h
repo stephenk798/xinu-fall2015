@@ -24,6 +24,7 @@ struct	memblk	{			/* See roundmb & truncmb	*/
 	struct 	memblk	*gbgnext; /* Ptr to next allocated memory blk 	*/
 	pid32 gbgpid;
 	};
+	
 extern	struct	memblk	memlist;	/* Head of free memory list	*/
 extern	void	*minheap;		/* Start of heap		*/
 extern	void	*maxheap;		/* Highest valid heap address	*/

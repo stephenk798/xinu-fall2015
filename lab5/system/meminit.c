@@ -75,9 +75,7 @@ void	meminit(void) {
 	memptr = &memlist;
 	memptr->mnext = (struct memblk *)NULL;
 	memptr->mlength = 0;
-	memptr->gbgpid = -1;
-	memptr->gbgnext = NULL;
-
+	
 	gbgptr = &gbglist;
 	gbgptr->gbgnext = NULL;
 	gbgptr->gbgpid = -1;

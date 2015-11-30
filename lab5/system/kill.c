@@ -24,15 +24,12 @@ syscall	kill(
 	}
 
 	kprintf("Killing process %s, pid: %d\n", prptr->prname, pid);
-	kprintf("memlist mlength b4 free: %u\n", memlist.mlength);
 	prevgbg = &gbglist;//Start the walking
 	nextgbg = gbglist.gbgnext;
 	while(nextgbg != NULL && nextgbg->gbgpid > 0 && gbglist.mlength > 0){
 		//check the pid that owns curr mem, if they match then free it
 		if(nextgbg->gbgpid == pid){
-			kprintf("nextgbg mlength: %u\n",nextgbg->mlength);
 			if(freemem((char *)nextgbg, nextgbg->mlength) != OK){ //Make sure it frees the memory aokay
-				kprintf("mem did not free aokay...\n");
 				restore(mask);
 				return SYSERR;
 			}
@@ -44,10 +41,8 @@ syscall	kill(
 			prevgbg = nextgbg;
 			nextgbg = nextgbg->gbgnext;
 		}
-		//prevgbg->gbgnext is updated when freemem is called, otherwise it is updated in the else above
-		kprintf("still in gbg walk, nextgbg pid: %d, gbg mlength: %u\n", nextgbg->gbgpid, gbglist.mlength); //Stuck in this loop for some reason
 	}
-	kprintf("finsihed %s gbg list. memlist mlength now: %u\n", prptr->prname, memlist.mlength);
+
 	if (--prcount <= 1) {		/* Last user process completes	*/
 		xdone();
 	}
@@ -57,6 +52,7 @@ syscall	kill(
 		close(prptr->prdesc[i]);
 	}
 	freestk(prptr->prstkbase, prptr->prstklen);
+
 	kprintf("made it up to the switch, prstate: %d\n", prptr->prstate);
 	switch (prptr->prstate) {
 	case PR_CURR:
