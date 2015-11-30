@@ -23,7 +23,7 @@ syscall	kill(
 		return SYSERR;
 	}
 
-	kprintf("Killing process %s\n", prptr->prname);
+	kprintf("Killing process %s, pid: %d\n", prptr->prname, pid);
 	kprintf("memlist mlength b4 free: %u\n", memlist.mlength);
 	prevgbg = &gbglist;//Start the walking
 	nextgbg = gbglist.gbgnext;
