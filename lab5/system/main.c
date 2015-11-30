@@ -64,21 +64,19 @@ void sendmem(pid32 pid){
 	sendbt(pid, 'A',0);
 	kprintf("msgglob: %c\n", msgglob);
 	freemem(memtest, 30);
-	kprintf("memlist mlength in snd: %u\n", memlist.mlength);
 	while(msgglob != 'B'){
 
 	}
+	kprintf("memlist mlength in snd: %u\n", memlist.mlength);
 	return;
 }
 
 void receivemem(){
 	kprintf("memlist in brec is: %u\n", memlist.mlength);
 	char*memtest3 = getmem(40);
-	if (registercb(&myrecvhandler) != OK) {
-		kprintf("recv handler registration failed\n");
-		return;
-	}
+	msgglob = receive();
 	kprintf("msgglob is: %c\n", msgglob);
+	msgglob++;
 	kprintf("memlist in erec is: %u\n", memlist.mlength);
 	return;
 }
