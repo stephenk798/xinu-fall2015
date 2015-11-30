@@ -17,6 +17,7 @@ syscall	freemem(
 	struct memblk *prevgbg;
 	struct memblk *nextgbg;
 
+	kprintf("freeingsize: %u, mem : 0x%08X\n", nbytes, blkaddr);
 	mask = disable();
 	if ((nbytes == 0) || ((uint32) blkaddr < (uint32) minheap)
 			  || ((uint32) blkaddr > (uint32) maxheap)) {
