@@ -40,8 +40,10 @@ char  	*getmem(
 
 			kprintf("---MAP OF GBGLIST---\n");
 			gbgptr = &gbglist;
+			gbgptr = gbgptr->gbgnext;
 			while(gbgptr!= NULL && gbgptr->gbgpid >= 0){
 				kprintf("gbg pid: %d, mlength: %u gbgaddress: 0x%08X, gbgnext: 0x%08X\n", gbgptr->gbgpid, gbgptr->mlength, gbgptr, gbgptr->gbgnext);
+				gbgptr = gbgptr->gbgnext;
 			}
 			kprintf("---MAP OF GBGLIST DONE---\n");
 			
@@ -57,7 +59,7 @@ char  	*getmem(
 			memlist.mlength -= nbytes;
 			
 			gbgptr = &gbglist; //get the allocated list
-			kprintf("gbglistaddy: 0x%08X, next addy: 0x%08X\n", gbgptr, gbgptr->gbgnext);
+			kprintf("gbglistaddy: 0x%08X, next addy: 0x%08X\n", gbgptr, gbgptr->gbgnext);f
 			gbglist.mlength += nbytes;
 			//curr->mlength = nbytes; //set the length of the block to actual size
 			curr->gbgpid = currpid; //Set the pid that owns the block
@@ -66,8 +68,10 @@ char  	*getmem(
 			
 			kprintf("---MAP OF GBGLIST---\n");
 			gbgptr = &gbglist;
+			gbgptr = gbgptr->gbgnext;
 			while(gbgptr!= NULL && gbgptr->gbgpid >= 0){
 				kprintf("gbg pid: %d, mlength: %u gbgaddress: 0x%08X, gbgnext: 0x%08X\n", gbgptr->gbgpid, gbgptr->mlength, gbgptr, gbgptr->gbgnext);
+				gbgptr = gbgptr->gbgnext;
 			}
 			kprintf("---MAP OF GBGLIST DONE---\n");
 
