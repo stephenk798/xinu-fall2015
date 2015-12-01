@@ -28,12 +28,14 @@ char  	*getmem(
 	while (curr != NULL) {			/* Search free list	*/
 
 		if (curr->mlength == nbytes) {	/* Block is exact match	*/
+			kprintf("----block is eact match\n");
 			prev->mnext = curr->mnext;
 			memlist.mlength -= nbytes;
 
 			gbgptr = &gbglist; //get the allocated list
 			kprintf("curr addy: 0x%08X, next addy: 0x%08X\n", curr, gbgptr, gbgptr->gbgnext);
 			gbglist.mlength += nbytes;
+			curr->mlength = nbytes;
 			curr->gbgpid = currpid; //Set the pid that owns the block
 			curr->gbgnext = gbgptr->gbgnext;//set the next gbg mem blk in list for current 
 			gbgptr->gbgnext = curr; //set the first gbg mem blk to current
@@ -51,7 +53,7 @@ char  	*getmem(
 			return (char *)(curr);
 
 		} else if (curr->mlength > nbytes) { /* Split big block	*/
-
+			kprintf("----split big block\n");
 			leftover = (struct memblk *)((uint32) curr +
 					nbytes);
 			prev->mnext = leftover;
