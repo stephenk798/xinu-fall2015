@@ -65,7 +65,7 @@ syscall	freemem(
 			prevgbg = nextgbg; 
 			nextgbg = nextgbg->gbgnext;
 		kprintf("fremem updated prevgbg: 0x%08X\n", prevgbg);
-		kprintf("freemem updated prevgbg: 0x%08X\n", nextgbg);
+		kprintf("freemem updated nextgbg: 0x%08X\n", nextgbg);
 		}
 
 		//found the block! time to get rid of its stuff, or end of list so don't free anything
