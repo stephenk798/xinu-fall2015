@@ -51,34 +51,27 @@ syscall	freemem(
 
 	memlist.mlength += nbytes;
 
-	kprintf("Bout to get to gbglist freemem stuff\n");
 	kprintf("gbglist.mlength: %u\n", gbglist.mlength);
-	if(gbglist.mlength > 0){
-		/* Remove allocated mem from list */
-		prevgbg = &gbglist; //do the same as above walking along the freelist
-		nextgbg = gbglist.gbgnext;
-		kprintf("freemem initial prevgbg: 0x%08X\n", prevgbg);
-		kprintf("freemem initial nextgbg: 0x%08X\n", nextgbg);
-		
-		//walk along until the block is found, or end of list is reached
-		while( nextgbg != NULL && nextgbg != block){
-			prevgbg = nextgbg; 
-			nextgbg = nextgbg->gbgnext;
-		kprintf("fremem updated prevgbg: 0x%08X\n", prevgbg);
-		kprintf("freemem updated nextgbg: 0x%08X\n", nextgbg);
-		}
-
-		//found the block! time to get rid of its stuff, or end of list so don't free anything
-		if(nextgbg != NULL){ 
-			prevgbg->gbgnext = nextgbg->gbgnext;//remove entry from gbglist
-			nextgbg = NULL;
-			gbglist.mlength -= nbytes;
-			block->gbgnext = NULL; //set the next to null
-			block->gbgpid = -1; //Isn't owned by any process anymore, so set to -1
-		}
+	/* Remove allocated mem from list */
+	prevgbg = &gbglist; //do the same as above walking along the freelist
+	nextgbg = gbglist.gbgnext;
+	
+	//walk along until the block is found, or end of list is reached
+	while( nextgbg != NULL && nextgbg != block){
+		prevgbg = nextgbg; 
+		nextgbg = nextgbg->gbgnext;
 	}
+
+	//found the block! time to get rid of its stuff, or end of list so don't free anything
+	if(nextgbg != NULL){ 
+		prevgbg->gbgnext = nextgbg->gbgnext;//remove entry from gbglist
+		nextgbg = NULL;
+		gbglist.mlength -= nbytes;
+		block->gbgnext = NULL; //set the next to null
+		block->gbgpid = -1; //Isn't owned by any process anymore, so set to -1
+	}
+
 	kprintf("gbglist.mlength after freemem stuff: %u\n", gbglist.mlength);
-	kprintf("Made it past gbgfreemem stuff\n");
 	/* Either coalesce with previous block or add to free list */
 
 	if (top == (uint32) block) { 	/* Coalesce with previous block	*/
