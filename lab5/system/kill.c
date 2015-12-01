@@ -28,7 +28,7 @@ syscall	kill(
 	nextgbg = gbglist.gbgnext;
 	kprintf("kill initial prevgbg: 0x%08X\n", prevgbg);
 	kprintf("kill initial nextgbg: 0x%08X\n", nextgbg);
-	while(nextgbg != NULL && nextgbg->gbgpid > 0 && gbglist.mlength > 0){
+	while(nextgbg != NULL){
 		//check the pid that owns curr mem, if they match then free it
 		if(nextgbg->gbgpid == pid){
 			if(freemem((char *)nextgbg, nextgbg->mlength) != OK){ //Make sure it frees the memory aokay
