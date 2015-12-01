@@ -63,6 +63,13 @@ char  	*getmem(
 			curr = curr->mnext;
 		}
 	}
+
+	kprintf("---MAP OF GBGLIST---\n");
+	gbgptr = &gbglist;
+	while(gbgptr!= NULL){
+		kprintf("gbg pid: %d, mlength: %u gbgaddress: 0x%08X, gbgnext: 0x%08X\n", gbgptr->gbgpid, gbgptr->mlength, gbgptr, gbgptr->gbgnext)
+	}
+	kprintf("---MAP OF GBGLIST DONE---\n");
 	restore(mask);
 	return (char *)SYSERR;
 }
