@@ -41,6 +41,7 @@ syscall	kill(
 			prevgbg = nextgbg;
 			nextgbg = nextgbg->gbgnext;
 		}
+	}
 
 	if (--prcount <= 1) {		/* Last user process completes	*/
 		xdone();
