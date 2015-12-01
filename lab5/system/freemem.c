@@ -73,7 +73,7 @@ syscall	freemem(
 			block->gbgpid = -1; //Isn't owned by any process anymore, so set to -1
 		}
 	}
-
+	kprintf("gbglist.mlength after freemem stuff: %u\n", gbglist.mlength);
 	kprintf("Made it past gbgfreemem stuff\n");
 	/* Either coalesce with previous block or add to free list */
 

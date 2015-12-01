@@ -83,6 +83,7 @@ process	main(void)
 {
 	kprintf("memlist in bmain is: %u\n", memlist.mlength);
 	kprintf("gbglist in bmain is: %u\n", gbglist.mlength);
+	kprintf("null looks like: 0x%08X\n", NULL);
 	msgglob = '0';
 	kprintf("msgglob: %c\n", msgglob);
 	
