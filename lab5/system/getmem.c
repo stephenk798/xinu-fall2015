@@ -21,43 +21,30 @@ char  	*getmem(
 	}
 
 	nbytes = (uint32) roundmb(nbytes);	/* Use memblk multiples	*/
-	kprintf("\n----------GETMEM CALLED from pid %d, nbytes: %u----------\n", currpid, nbytes);
 	prev = &memlist;
 	curr = memlist.mnext;
-	kprintf("gbglist.mlength in getmem: %u\n", gbglist.mlength);
 	while (curr != NULL) {			/* Search free list	*/
 
 		if (curr->mlength == nbytes) {	/* Block is exact match	*/
-			kprintf("----block is eact match\n");
 			prev->mnext = curr->mnext;
 			memlist.mlength -= nbytes;
 
 			gbgptr = &gbglist; //get the allocated list
 			gbglist.mlength += nbytes;
+			//find end of list
 			while(gbgptr->gbgnext != NULL){
 				gbgptr = gbgptr->gbgnext;
 			}
-			kprintf("curr addy: 0x%08X, gbgptr: 0x%08X, next addy: 0x%08X\n", curr, gbgptr, gbgptr->gbgnext);
 			
 			curr->mlength = nbytes; //set the length of the block to actual size
 			curr->gbgpid = currpid; //Set the pid that owns the block
 			curr->gbgnext = NULL;//set the next gbg mem blk in list for current 
 			gbgptr->gbgnext = curr; //set the first gbg mem blk to current
-
-			kprintf("\n---MAP OF GBGLIST---\n");
-			gbgptr = &gbglist;
-			gbgptr = gbgptr->gbgnext;
-			while(gbgptr!= NULL && gbgptr->gbgpid >= 0){
-				kprintf("gbg pid: %d, mlength: %u gbgaddress: 0x%08X, gbgnext: 0x%08X\n", gbgptr->gbgpid, gbgptr->mlength, gbgptr, gbgptr->gbgnext);
-				gbgptr = gbgptr->gbgnext;
-			}
-			kprintf("---MAP OF GBGLIST DONE---\n");
 			
 			restore(mask);
 			return (char *)(curr);
 
 		} else if (curr->mlength > nbytes) { /* Split big block	*/
-			kprintf("----split big block\n");
 			leftover = (struct memblk *)((uint32) curr +
 					nbytes);
 			prev->mnext = leftover;
@@ -67,25 +54,16 @@ char  	*getmem(
 			
 			gbgptr = &gbglist; //get the allocated list
 			gbglist.mlength += nbytes;
+			//find end of list
 			while(gbgptr->gbgnext != NULL){
 				gbgptr = gbgptr->gbgnext;
 			}
-			kprintf("curr addy: 0x%08X, gbgptr: 0x%08X, next addy: 0x%08X\n", curr, gbgptr, gbgptr->gbgnext);
 			
 			curr->mlength = nbytes; //set the length of the block to actual size
 			curr->gbgpid = currpid; //Set the pid that owns the block
 			curr->gbgnext = NULL;//set the next gbg mem blk in list for current 
 			gbgptr->gbgnext = curr; //set the first gbg mem blk to current
 			
-			kprintf("---MAP OF GBGLIST---\n");
-			gbgptr = &gbglist;
-			gbgptr = gbgptr->gbgnext;
-			while(gbgptr!= NULL && gbgptr->gbgpid >= 0){
-				kprintf("gbg pid: %d, mlength: %u gbgaddress: 0x%08X, gbgnext: 0x%08X\n", gbgptr->gbgpid, gbgptr->mlength, gbgptr, gbgptr->gbgnext);
-				gbgptr = gbgptr->gbgnext;
-			}
-			kprintf("---MAP OF GBGLIST DONE---\n");
-
 			restore(mask);
 			return (char *)(curr);
 		} else {			/* Move to next block	*/

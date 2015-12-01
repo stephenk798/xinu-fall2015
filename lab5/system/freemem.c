@@ -50,7 +50,6 @@ syscall	freemem(
 
 	memlist.mlength += nbytes;
 
-	kprintf("gbglist.mlength: %u\n", gbglist.mlength);
 	/* Remove allocated mem from list */
 	prevgbg = &gbglist; //do the same as above walking along the freelist
 	nextgbg = gbglist.gbgnext;
@@ -70,7 +69,6 @@ syscall	freemem(
 		block->gbgpid = -1; //Isn't owned by any process anymore, so set to -1
 	}
 
-	kprintf("gbglist.mlength after freemem stuff: %u\n", gbglist.mlength);
 	/* Either coalesce with previous block or add to free list */
 
 	if (top == (uint32) block) { 	/* Coalesce with previous block	*/
