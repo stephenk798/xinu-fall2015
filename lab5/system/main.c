@@ -109,7 +109,8 @@ process	main(void)
 	// resume(sndD);
 	// resume(rec);
 	while(TRUE){
-		
+		kprintf("In main msgglob: %c\n", msgglob);
+		sleepms(100);
 	}
 
 
