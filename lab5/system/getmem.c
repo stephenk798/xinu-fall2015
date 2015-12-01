@@ -37,6 +37,12 @@ char  	*getmem(
 			curr->gbgnext = gbgptr->gbgnext;//set the next gbg mem blk in list for current 
 			gbgptr->gbgnext = curr; //set the first gbg mem blk to current
 
+			kprintf("---MAP OF GBGLIST---\n");
+			gbgptr = &gbglist;
+			while(gbgptr!= NULL){
+				kprintf("gbg pid: %d, mlength: %u gbgaddress: 0x%08X, gbgnext: 0x%08X\n", gbgptr->gbgpid, gbgptr->mlength, gbgptr, gbgptr->gbgnext);f
+			}
+			kprintf("---MAP OF GBGLIST DONE---\n");
 			
 			restore(mask);
 			return (char *)(curr);
@@ -56,6 +62,13 @@ char  	*getmem(
 			curr->gbgnext = gbgptr->gbgnext;//set the next gbg mem blk in list for current 
 			gbgptr->gbgnext = curr; //set the first gbg mem blk to current
 			
+			kprintf("---MAP OF GBGLIST---\n");
+			gbgptr = &gbglist;
+			while(gbgptr!= NULL){
+				kprintf("gbg pid: %d, mlength: %u gbgaddress: 0x%08X, gbgnext: 0x%08X\n", gbgptr->gbgpid, gbgptr->mlength, gbgptr, gbgptr->gbgnext);f
+			}
+			kprintf("---MAP OF GBGLIST DONE---\n");
+			
 			restore(mask);
 			return (char *)(curr);
 		} else {			/* Move to next block	*/
@@ -64,12 +77,7 @@ char  	*getmem(
 		}
 	}
 
-	kprintf("---MAP OF GBGLIST---\n");
-	gbgptr = &gbglist;
-	while(gbgptr!= NULL){
-		kprintf("gbg pid: %d, mlength: %u gbgaddress: 0x%08X, gbgnext: 0x%08X\n", gbgptr->gbgpid, gbgptr->mlength, gbgptr, gbgptr->gbgnext);
-	}
-	kprintf("---MAP OF GBGLIST DONE---\n");
+	
 	restore(mask);
 	return (char *)SYSERR;
 }
