@@ -71,8 +71,7 @@ void sendmem(pid32 pid){
 void receivemem(){
 	kprintf("memlist in brec is: %u\n", memlist.mlength);
 	char*memtest3 = getmem(40);
-	msgglob = receive();
-	msgglob++;
+	regCB();
 	kprintf("msgglob is: %c\n", msgglob);
 	kprintf("memlist in erec is: %u\n", memlist.mlength);
 	return;
