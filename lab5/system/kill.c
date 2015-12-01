@@ -23,7 +23,7 @@ syscall	kill(
 		return SYSERR;
 	}
 
-	kprintf("Killing process %s, pid: %d\n", prptr->prname, pid);
+	kprintf("---Killing process %s, pid: %d\n", prptr->prname, pid);
 	prevgbg = &gbglist;//Start the walking
 	nextgbg = gbglist.gbgnext;
 	while(nextgbg != NULL){
@@ -48,7 +48,6 @@ syscall	kill(
 	}
 	send(prptr->prparent, pid);
 	for (i=0; i<3; i++) {
-		kprintf(" i is %d\n");
 		close(prptr->prdesc[i]);
 	}
 	freestk(prptr->prstkbase, prptr->prstklen);

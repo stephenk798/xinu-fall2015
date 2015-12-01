@@ -61,8 +61,9 @@ void sendmem(pid32 pid){
 	kprintf("memlist mlength in bsnd: %u\n", memlist.mlength);
 	char* memtest = getmem(30);
 	char* memtest2 = getmem(70);
-	send(pid, 'A');
 	freemem(memtest, 30);
+	send(pid, 'A');
+	
 	while(msgglob < 'B'){
 
 	}
@@ -90,8 +91,8 @@ process	main(void)
 	pid32 recmem = create(receivemem,1024,21,"recmem", 0, NULL);
 	pid32 sndmem = create(sendmem,1024,21,"sndmem", 1, recmem);
 	
-	resume(recmem);
 	resume(sndmem);
+	resume(recmem);
 	//pid32 rec = create(regcbsig, 1024, 20, "regcbsig", 0, NULL);
 	//pid32 sndA = create(sendA, 1024, 20, "sndA", 2, rec, 'A');
 	// resume(sndA);
