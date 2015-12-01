@@ -62,7 +62,7 @@ void sendmem(pid32 pid){
 	char* memtest = getmem(30);
 	char* memtest2 = getmem(70);
 	freemem(memtest, 30);
-	send(pid, 'A');
+	sendbt(pid, 'A', 0);
 	
 	while(msgglob < 'B'){
 
