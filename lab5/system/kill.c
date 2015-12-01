@@ -26,6 +26,8 @@ syscall	kill(
 	kprintf("Killing process %s, pid: %d\n", prptr->prname, pid);
 	prevgbg = &gbglist;//Start the walking
 	nextgbg = gbglist.gbgnext;
+	kprintf("kill initial prevgbg: 0x%08X\n", prevgbg);
+	kprintf("kill initial nextgbg: 0x%08X\n", nextgbg);
 	while(nextgbg != NULL && nextgbg->gbgpid > 0 && gbglist.mlength > 0){
 		//check the pid that owns curr mem, if they match then free it
 		if(nextgbg->gbgpid == pid){
@@ -41,19 +43,18 @@ syscall	kill(
 			prevgbg = nextgbg;
 			nextgbg = nextgbg->gbgnext;
 		}
+		kprintf("killgbg updated prevgbg: 0x%08X\n", prevgbg);
+		kprintf("killgbg updated nextgbg: 0x%08X\n", nextgbg);
 	}
 
 	if (--prcount <= 1) {		/* Last user process completes	*/
 		xdone();
 	}
-	kprintf("before teh send thing m8\n");
 	send(prptr->prparent, pid);
-	kprintf("Send whatever was needed\n");
 	for (i=0; i<3; i++) {
 		kprintf(" i is %d\n");
 		close(prptr->prdesc[i]);
 	}
-	kprintf("getting to freestk\n");
 	freestk(prptr->prstkbase, prptr->prstklen);
 
 	kprintf("made it up to the switch, prstate: %d\n", prptr->prstate);

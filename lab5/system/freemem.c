@@ -57,12 +57,15 @@ syscall	freemem(
 		/* Remove allocated mem from list */
 		prevgbg = &gbglist; //do the same as above walking along the freelist
 		nextgbg = gbglist.gbgnext;
+		kprintf("freemem initial prevgbg: 0x%08X\n", prevgbg);
+		kprintf("freemem initial nextgbg: 0x%08X\n", nextgbg);
 		
 		//walk along until the block is found, or end of list is reached
 		while( nextgbg != NULL && nextgbg != block){
 			prevgbg = nextgbg; 
 			nextgbg = nextgbg->gbgnext;
-			kprintf("nextgbg: 0x%08X\n", nextgbg);
+		kprintf("fremem updated prevgbg: 0x%08X\n", prevgbg);
+		kprintf("freemem updated prevgbg: 0x%08X\n", nextgbg);
 		}
 
 		//found the block! time to get rid of its stuff, or end of list so don't free anything

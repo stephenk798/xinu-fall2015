@@ -21,7 +21,7 @@ char  	*getmem(
 	}
 
 	nbytes = (uint32) roundmb(nbytes);	/* Use memblk multiples	*/
-
+	kprintf("----------GETMEM CALLED----------\n");
 	prev = &memlist;
 	curr = memlist.mnext;
 	kprintf("gbglist.mlength in getmem: %u\n", gbglist.mlength);
