@@ -62,11 +62,8 @@ void sendmem(pid32 pid){
 	char* memtest = getmem(30);
 	char* memtest2 = getmem(70);
 	freemem(memtest, 30);
-	sendbt(pid, 'A', 0);
+	send(pid, 'A');
 	
-	while(msgglob < 'B'){
-
-	}
 	kprintf("memlist mlength in snd: %u\n", memlist.mlength);
 	return;
 }
