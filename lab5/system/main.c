@@ -71,7 +71,8 @@ void sendmem(pid32 pid){
 void receivemem(){
 	kprintf("memlist in brec is: %u\n", memlist.mlength);
 	char*memtest3 = getmem(40);
-	regCB();
+	msgglob = receive();
+	msgglob++;
 	kprintf("msgglob is: %c\n", msgglob);
 	kprintf("memlist in erec is: %u\n", memlist.mlength);
 	return;
@@ -87,8 +88,8 @@ process	main(void)
 	pid32 recmem = create(receivemem,1024,21,"recmem", 0, NULL);
 	pid32 sndmem = create(sendmem,1024,21,"sndmem", 1, recmem);
 	
-	resume(sndmem);
 	resume(recmem);
+	resume(sndmem);
 	//pid32 rec = create(regcbsig, 1024, 20, "regcbsig", 0, NULL);
 	//pid32 sndA = create(sendA, 1024, 20, "sndA", 2, rec, 'A');
 	// resume(sndA);
