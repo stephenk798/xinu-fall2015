@@ -59,10 +59,10 @@ int regcbsig(){
 
 void sendmem(pid32 pid){
 	kprintf("memlist mlength in bsnd: %u\n", memlist.mlength);
-	//char* memtest = getmem(30);
-	//char* memtest2 = getmem(70);
+	char* memtest = getmem(30);
+	char* memtest2 = getmem(70);
 	send(pid, 'A');
-	//freemem(memtest, 30);
+	freemem(memtest, 30);
 	while(msgglob < 'B'){
 
 	}
