@@ -57,6 +57,7 @@ char  	*getmem(
 			memlist.mlength -= nbytes;
 			
 			gbgptr = &gbglist; //get the allocated list
+			kprintf("gbglistaddy: 0x%08X, next addy: 0x%08X\n", gbgptr, gbgptr->gbgnext);
 			gbglist.mlength += nbytes;
 			//curr->mlength = nbytes; //set the length of the block to actual size
 			curr->gbgpid = currpid; //Set the pid that owns the block
