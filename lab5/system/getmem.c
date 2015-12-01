@@ -21,7 +21,7 @@ char  	*getmem(
 	}
 
 	nbytes = (uint32) roundmb(nbytes);	/* Use memblk multiples	*/
-	kprintf("----------GETMEM CALLED from pid %d, nbytes: %u----------\n", currpid, nbytes);
+	kprintf("\n----------GETMEM CALLED from pid %d, nbytes: %u----------\n", currpid, nbytes);
 	prev = &memlist;
 	curr = memlist.mnext;
 	kprintf("gbglist.mlength in getmem: %u\n", gbglist.mlength);
@@ -40,7 +40,7 @@ char  	*getmem(
 			curr->gbgnext = gbgptr->gbgnext;//set the next gbg mem blk in list for current 
 			gbgptr->gbgnext = curr; //set the first gbg mem blk to current
 
-			kprintf("---MAP OF GBGLIST---\n");
+			kprintf("\n---MAP OF GBGLIST---\n");
 			gbgptr = &gbglist;
 			gbgptr = gbgptr->gbgnext;
 			while(gbgptr!= NULL && gbgptr->gbgpid >= 0){
