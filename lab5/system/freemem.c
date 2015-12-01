@@ -62,6 +62,7 @@ syscall	freemem(
 		while( nextgbg != NULL && nextgbg != block){
 			prevgbg = nextgbg; 
 			nextgbg = nextgbg->gbgnext;
+			kprintf("nextgbg: 0x%08X\n", nextgbg);
 		}
 
 		//found the block! time to get rid of its stuff, or end of list so don't free anything
